@@ -13,14 +13,12 @@ class ScrapeCasesWorker
     scraper_class = Object.const_get(class_name)
     scraper = scraper_class.new
 
-    begin
-      database_client = Database.client
-      cases_repository = CasesRepository.new(database_client)
-      cases_repository.insert(scraper.scrape)
-    ensure
-      database_client.close
-    end
+    database_client = Database.client
+    cases_repository = CasesRepository.new(database_client)
+    cases_repository.insert(scraper.scrape)
 
     ExportJsonWorker.perform_async(scraper.country)
+  ensure
+    database_client.close if database_client
   end
 end

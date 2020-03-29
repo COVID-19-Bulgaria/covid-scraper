@@ -30,12 +30,18 @@ class ExportJsonWorker
     )
 
     PublishDatasetsWorker.perform_async
+  ensure
+    database_client.close if database_client
   end
 
   private
 
+  def database_client
+    @database_client ||= Database.client
+  end
+
   def cases_repository
-    @cases_repository ||= CasesRepository.new(Database.client)
+    @cases_repository ||= CasesRepository.new(database_client)
   end
 
   def write_file(filename:, data:)
