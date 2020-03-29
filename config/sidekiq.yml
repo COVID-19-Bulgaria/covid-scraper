@@ -1,0 +1,10 @@
+---
+:verbose: false
+:concurrency: 2
+
+production:
+  :concurrency: 4
+
+:queues:
+  - scraping
+  - default
