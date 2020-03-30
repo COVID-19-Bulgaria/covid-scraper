@@ -39,6 +39,7 @@ class Cases
     country == other.country &&
       infected == other.infected &&
       cured == other.cured &&
-      fatal == other.fatal
+      fatal == other.fatal &&
+      Date.parse(timestamp) == Date.parse(other.timestamp)
   end
 end
