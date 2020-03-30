@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'pry'
-
 class CasesRepository
   def initialize(database_client)
     @database_client = database_client
@@ -35,7 +33,7 @@ class CasesRepository
       database_client.prepare(
         'find_latest',
         '
-          select c.infected, c.cured, c.fatal, c.timestamp from covid19.cases c
+          select * from covid19.cases c
           where c.country = $1
           order by c.timestamp desc
           limit 1

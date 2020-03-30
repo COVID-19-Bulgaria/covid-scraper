@@ -1,2 +1,2 @@
-sidekiq: bundle exec sidekiq -C ./config/sidekiq.yml -r ./workers.rb
-sidekiq-web: bundle exec rackup config.ru -o 0.0.0.0
+sidekiq: bundle exec sidekiq -e $ENVIRONMENT -C ./config/sidekiq.yml -r ./crontab.rb
+sidekiq-web: bundle exec rackup config.ru -o 0.0.0.0 --env $ENVIRONMENT

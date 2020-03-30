@@ -11,6 +11,16 @@ class Cases
     @timestamp = timestamp
   end
 
+  def self.build(data)
+    new(
+      country: data['country'],
+      infected: data['infected'],
+      cured: data['cured'],
+      fatal: data['fatal'],
+      timestamp: data['timestamp']
+    )
+  end
+
   def to_h
     {
       country: @country,
@@ -23,5 +33,12 @@ class Cases
 
   def to_json(*_args)
     to_h.to_json
+  end
+
+  def ==(other)
+    country == other.country &&
+      infected == other.infected &&
+      cured == other.cured &&
+      fatal == other.fatal
   end
 end
