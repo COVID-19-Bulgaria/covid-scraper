@@ -35,7 +35,7 @@ class CasesScraper
       infected: infected,
       cured: cured,
       fatal: fatal,
-      timestamp: Time.now
+      timestamp: Time.now.to_s
     )
   end
 
