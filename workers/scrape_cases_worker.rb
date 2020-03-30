@@ -15,10 +15,15 @@ class ScrapeCasesWorker
 
     database_client = Database.client
     cases_repository = CasesRepository.new(database_client)
-    cases_repository.insert(scraper.scrape)
 
+    latest_cases = Cases.build(cases_repository.latest(scraper.country).first)
+    scraped_cases = scraper.scrape
+
+    return if latest_cases == scraped_cases
+
+    cases_repository.insert(scraped_cases)
     ExportJsonWorker.perform_async(scraper.country)
   ensure
-    database_client.close if database_client
+    database_client&.close
   end
 end

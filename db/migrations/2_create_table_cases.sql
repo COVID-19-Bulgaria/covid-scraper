@@ -1,5 +1,5 @@
 CREATE TABLE "covid19"."cases" (
-  "id" serial NOT NULL,
+  "id" serial NOT NULL PRIMARY KEY,
   "country" character varying(32) NOT NULL,
   "infected" integer NOT NULL,
   "cured" integer NOT NULL,

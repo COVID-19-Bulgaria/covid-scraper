@@ -2,8 +2,8 @@
 
 require_relative '../db/database'
 require_relative '../repositories/cases_repository'
-require_relative '../workers/publish_datasets_worker'
 require_relative '../models/date_cases'
+require_relative './publish_datasets_worker'
 
 class ExportJsonWorker
   include Sidekiq::Worker
@@ -31,7 +31,7 @@ class ExportJsonWorker
 
     PublishDatasetsWorker.perform_async
   ensure
-    database_client.close if database_client
+    database_client&.close
   end
 
   private
@@ -73,15 +73,7 @@ class ExportJsonWorker
   end
 
   def latest_cases(country)
-    cases = cases_repository.latest(country).first
-
-    Cases.new(
-      country: country,
-      infected: cases['infected'],
-      cured: cases['cured'],
-      fatal: cases['fatal'],
-      timestamp: cases['timestamp']
-    ).to_json
+    Cases.build(cases_repository.latest(country).first).to_json
   end
 
   def date_cases(country)
