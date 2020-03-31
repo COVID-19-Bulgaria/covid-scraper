@@ -4,7 +4,7 @@ insert into covid19.places_cases (place_id, infected, cured, fatal, sources, tim
     id,
     11,
     1,
-    1,
+    2,
     'https://nova.bg/news/view/2020/03/30/283326/%D0%BD%D0%BE%D0%B2%D0%B8-5-%D0%B7%D0%B0%D1%80%D0%B0%D0%B7%D0%B5%D0%BD%D0%B8-%D1%81-covid-19-%D1%83-%D0%BD%D0%B0%D1%81/',
     CURRENT_TIMESTAMP
   from covid19.places where name = 'Благоевград'
@@ -140,18 +140,6 @@ insert into covid19.places_cases (place_id, infected, cured, fatal, sources, tim
     'https://nova.bg/news/view/2020/03/30/283326/%D0%BD%D0%BE%D0%B2%D0%B8-5-%D0%B7%D0%B0%D1%80%D0%B0%D0%B7%D0%B5%D0%BD%D0%B8-%D1%81-covid-19-%D1%83-%D0%BD%D0%B0%D1%81/',
     CURRENT_TIMESTAMP
   from covid19.places where name = 'Перник'
-);
-
-insert into covid19.places_cases (place_id, infected, cured, fatal, sources, timestamp)
-(
-  select
-    id,
-    11,
-    0,
-    2,
-    'https://nova.bg/news/view/2020/03/30/283326/%D0%BD%D0%BE%D0%B2%D0%B8-5-%D0%B7%D0%B0%D1%80%D0%B0%D0%B7%D0%B5%D0%BD%D0%B8-%D1%81-covid-19-%D1%83-%D0%BD%D0%B0%D1%81/',
-    CURRENT_TIMESTAMP
-  from covid19.places where name = 'Благоевград'
 );
 
 insert into covid19.places_cases (place_id, infected, cured, fatal, sources, timestamp)
