@@ -1,10 +1,8 @@
 # frozen_string_literal: true
 
-class CasesRepository
-  def initialize(database_client)
-    @database_client = database_client
-  end
+require_relative './base_repository'
 
+class CasesRepository < BaseRepository
   def insert(cases)
     begin
       database_client.prepare(
@@ -77,8 +75,4 @@ class CasesRepository
 
     database_client.exec_prepared('find_date_diff_cases_by_country', [country])
   end
-
-  private
-
-  attr_reader :database_client
 end

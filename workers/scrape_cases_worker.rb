@@ -3,7 +3,7 @@
 require_relative '../db/database'
 require_relative '../repositories/cases_repository'
 require_relative '../scrapers/bulgaria_cases_scraper'
-require_relative './export_json_worker'
+require_relative './export_cases_json_worker'
 
 class ScrapeCasesWorker
   include Sidekiq::Worker
@@ -22,7 +22,7 @@ class ScrapeCasesWorker
     return if latest_cases == scraped_cases
 
     cases_repository.insert(scraped_cases)
-    ExportJsonWorker.perform_async(scraper.country)
+    ExportCasesJsonWorker.perform_async(scraper.country)
   ensure
     database_client&.close
   end

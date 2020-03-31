@@ -1,11 +1,17 @@
 # frozen_string_literal: true
 
 require_relative '../db/database'
+require_relative '../helpers/file_helpers'
+require_relative '../helpers/database_helpers'
 require_relative '../repositories/cases_repository'
+require_relative '../repositories/places_repository'
 require_relative '../models/date_cases'
 require_relative './publish_datasets_worker'
 
-class ExportJsonWorker
+class ExportCasesJsonWorker
+  include FileHelpers
+  include DatabaseHelpers
+
   include Sidekiq::Worker
   sidekiq_options retry: 2, backtrace: true
 
@@ -15,17 +21,17 @@ class ExportJsonWorker
 
   def perform(country)
     write_file(
-      filename: build_totals_file_path(country),
+      filename: build_database_file_path(country, TOTALS_DATASET_FILENAME),
       data: latest_cases(country)
     )
 
     write_file(
-      filename: build_date_cases_file_path(country),
+      filename: build_database_file_path(country, DATE_CASES_FILENAME),
       data: date_cases(country)
     )
 
     write_file(
-      filename: build_date_diff_cases_file_path(country),
+      filename: build_database_file_path(country, DATE_DIFF_CASES_FILENAME),
       data: date_diff_cases(country)
     )
 
@@ -36,40 +42,8 @@ class ExportJsonWorker
 
   private
 
-  def database_client
-    @database_client ||= Database.client
-  end
-
   def cases_repository
     @cases_repository ||= CasesRepository.new(database_client)
-  end
-
-  def write_file(filename:, data:)
-    IO.write(filename, data, 0, mode: 'w')
-  end
-
-  def build_totals_file_path(country)
-    File.join(
-      ENV['COVID_DATABASE_PATH_CONTAINER'],
-      country,
-      TOTALS_DATASET_FILENAME
-    )
-  end
-
-  def build_date_cases_file_path(country)
-    File.join(
-      ENV['COVID_DATABASE_PATH_CONTAINER'],
-      country,
-      DATE_CASES_FILENAME
-    )
-  end
-
-  def build_date_diff_cases_file_path(country)
-    File.join(
-      ENV['COVID_DATABASE_PATH_CONTAINER'],
-      country,
-      DATE_DIFF_CASES_FILENAME
-    )
   end
 
   def latest_cases(country)
