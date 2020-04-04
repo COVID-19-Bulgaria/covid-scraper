@@ -21,7 +21,7 @@ as $$
       select pc.infected, pc.cured, pc.fatal
       into _latest_infected, _latest_cured, _latest_fatal
       from covid19.places_cases pc
-      where pc.place_id = place_id
+      where pc.place_id = _place_id
       order by timestamp desc
       limit 1;
 
