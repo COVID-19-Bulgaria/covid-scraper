@@ -1,4 +1,4 @@
-INSERT INTO "places" ("id", "name", "longitude", "latitude") VALUES
+INSERT INTO "places" ("id", "name", "latitude", "longitude") VALUES
 (nextval('places_id_seq'), 'Благоевград',  42.0116,  23.0905),
 (nextval('places_id_seq'), 'Варна',  43.2071,  27.9151),
 (nextval('places_id_seq'), 'Габрово',  42.9663,  25.2507),
@@ -23,3 +23,4 @@ INSERT INTO "places" ("id", "name", "longitude", "latitude") VALUES
 (nextval('places_id_seq'), 'Хасково',  41.7652,  25.8975),
 (nextval('places_id_seq'), 'Кърджали', 41.5723,  25.4773),
 (nextval('places_id_seq'), 'Кюстендил',  42.2858,  22.6952);
+(nextval('places_id_seq'), 'Русе',  43.835,  25.9864);
