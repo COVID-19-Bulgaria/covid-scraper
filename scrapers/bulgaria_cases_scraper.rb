@@ -29,4 +29,24 @@ class BulgariaCasesScraper < CasesScraper
   def fatal
     parse.xpath(FATAL_CONTAINER_XPATH).text
   end
+
+  def scrape(country_id)
+    data = {
+      'country_id' => country_id,
+      'infected' => infected,
+      'cured' => cured,
+      'fatal' => fatal,
+      'timestamp' => Time.now.to_s
+    }
+
+    Cases.build(data)
+  end
+
+  def cases_match(first, second)
+    first.country_id == second.country_id &&
+      first.infected == second.infected &&
+      first.cured == second.cured &&
+      first.fatal == second.fatal &&
+      Date.parse(first.timestamp) == Date.parse(second.timestamp)
+  end
 end
