@@ -1,12 +1,13 @@
 # frozen_string_literal: true
 
 class PlaceCases
-  attr_reader :name, :latitude, :longitude, :infected, :cured, :fatal,
-              :timestamp
+  attr_reader :name, :place_id, :latitude, :longitude, :infected, :cured,
+              :fatal, :timestamp
 
-  def initialize(name:, latitude:, longitude:, infected:, cured:, fatal:,
-                 timestamp:)
+  def initialize(name:, place_id:, latitude:, longitude:, infected:, cured:,
+                 fatal:, timestamp:)
     @name = name
+    @place_id = place_id.to_i
     @latitude = latitude.to_f
     @longitude = longitude.to_f
     @infected = infected.to_i
@@ -18,6 +19,7 @@ class PlaceCases
   def self.build(data)
     new(
       name: data['name'],
+      place_id: data['place_id'],
       latitude: data['latitude'],
       longitude: data['longitude'],
       infected: data['infected'],

@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require_relative '../db/database'
 require_relative '../helpers/file_helpers'
 require_relative '../helpers/database_helpers'
 require_relative '../repositories/cases_repository'
 require_relative '../repositories/places_repository'
+require_relative '../repositories/country_repository'
 require_relative '../models/date_cases'
 require_relative './publish_datasets_worker'
 
@@ -19,20 +19,22 @@ class ExportCasesJsonWorker
   DATE_CASES_FILENAME = 'DateCasesDataset.json'
   DATE_DIFF_CASES_FILENAME = 'DateDiffCasesDataset.json'
 
-  def perform(country)
+  def perform(country_name)
+    country = find_country(country_name)
+
     write_file(
-      filename: build_database_file_path(country, TOTALS_DATASET_FILENAME),
-      data: latest_cases(country)
+      filename: build_database_file_path(country.name, TOTALS_DATASET_FILENAME),
+      data: latest_cases(country.id)
     )
 
     write_file(
-      filename: build_database_file_path(country, DATE_CASES_FILENAME),
-      data: date_cases(country)
+      filename: build_database_file_path(country.name, DATE_CASES_FILENAME),
+      data: date_cases(country.name)
     )
 
     write_file(
-      filename: build_database_file_path(country, DATE_DIFF_CASES_FILENAME),
-      data: date_diff_cases(country)
+      filename: build_database_file_path(country.name, DATE_DIFF_CASES_FILENAME),
+      data: date_diff_cases(country.name)
     )
 
     PublishDatasetsWorker.perform_async
@@ -42,12 +44,20 @@ class ExportCasesJsonWorker
 
   private
 
+  def country_repository
+    @country_repository ||= CountryRepository.new(database_client)
+  end
+
+  def find_country(name)
+    Country.build(country_repository.find_by_name(name).first)
+  end
+
   def cases_repository
     @cases_repository ||= CasesRepository.new(database_client)
   end
 
-  def latest_cases(country)
-    Cases.build(cases_repository.latest(country).first).to_json
+  def latest_cases(country_id)
+    Cases.build(cases_repository.latest(country_id).first).to_json
   end
 
   def date_cases(country)

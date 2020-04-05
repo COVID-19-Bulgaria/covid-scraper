@@ -29,14 +29,47 @@ class CasesScraper
     raise 'Override with actual implementation.'
   end
 
-  def scrape
+  def men
+    raise 'Override with actual implementation.'
+  end
+
+  def women
+    raise 'Override with actual implementation.'
+  end
+
+  def hospitalized
+    raise 'Override with actual implementation.'
+  end
+
+  def intensive_care
+    raise 'Override with actual implementation.'
+  end
+
+  def medical_staff
+    raise 'Override with actual implementation.'
+  end
+
+  def regions_cases
+    raise 'Override with actual implementation.'
+  end
+
+  def scrape(country_id)
     Cases.new(
-      country: @country,
+      country_id: country_id,
       infected: infected,
       cured: cured,
       fatal: fatal,
+      men: men,
+      women: women,
+      hospitalized: hospitalized,
+      intensive_care: intensive_care,
+      medical_staff: medical_staff,
       timestamp: Time.now.to_s
     )
+  end
+
+  def cases_match(first, second)
+    first == second
   end
 
   private

@@ -11,6 +11,7 @@ GEM
     fugit (1.3.3)
       et-orbi (~> 1.1, >= 1.1.8)
       raabro (~> 1.1)
+    fuzzy_match (2.1.0)
     git (1.6.0)
       rchardet (~> 1.8)
     jaro_winkler (1.5.4)
@@ -22,6 +23,10 @@ GEM
     parser (2.7.0.5)
       ast (~> 2.4.0)
     pg (1.2.3)
+    pragmatic_segmenter (0.3.22)
+      unicode
+    pragmatic_tokenizer (3.0.7)
+      unicode
     pry (0.13.0)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -52,6 +57,7 @@ GEM
       sidekiq (>= 4.2.1)
     tzinfo (2.0.1)
       concurrent-ruby (~> 1.0)
+    unicode (0.4.4.4)
     unicode-display_width (1.6.1)
 
 PLATFORMS
@@ -59,9 +65,12 @@ PLATFORMS
 
 DEPENDENCIES
   foreman (~> 0.87.0)
+  fuzzy_match (~> 2.1)
   git (~> 1.6)
   nokogiri (~> 1.10, >= 1.10.9)
   pg (~> 1.2, >= 1.2.3)
+  pragmatic_segmenter (~> 0.3.22)
+  pragmatic_tokenizer (~> 3.0, >= 3.0.7)
   pry
   rack (~> 2.2, >= 2.2.2)
   rubocop
