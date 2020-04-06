@@ -8,15 +8,17 @@ require_relative './exceptions/article_segmentation_error'
 class BulgariaVMACasesScraper < CasesScraper
   COUNTRY_IDENTIFIER = 'Bulgaria'
   WEBSITE_URI = 'https://www.vma.bg/newsitem.html?action=news&newsid=842'
-  ARTICLE_CONTAINER_XPATH = '/html/body/div[4]/div/div[2]/div/div[2]'
+  ARTICLE_CONTAINER_CSS = 'div.right-side-page'
   INFECTED_SEGMENT_NEEDLE = 'потвърдени случаи covid-19'
   CURED_SEGMENT_NEEDLE = 'излекувани'
   FATAL_SEGMENT_NEEDLE = 'починали'
-  MEN_SEGMENT_NEEDLE = 'мъже'
-  WOMEN_SEGMENT_NEEDLE = 'жен'
+  MEN_SEGMENT_NEEDLE = 'всички мъже'
+  WOMEN_SEGMENT_NEEDLE = 'всички жен'
+  MEN = 'мъже'
+  WOMEN = 'жени'
   HOSPITALIZED_SEGMENT_NEEDLE = 'настанен лекарско наблюдение'
   INTENSIVE_CARE_SEGMENT_NEEDLE = 'интензив'
-  REGIONS_CASES_SEGMENT_NEEDLE = 'адм обл'
+  REGIONS_CASES_SEGMENT_NEEDLE = 'Регистрираните случаи по административни области са както следва ;'
   MEDICAL_STAFF_NEEDLE = 'медицински служители'
 
   def initialize
@@ -25,6 +27,7 @@ class BulgariaVMACasesScraper < CasesScraper
 
   def infected
     segment = fuzzy_match.find(INFECTED_SEGMENT_NEEDLE)
+
     raise ArticleSegmentationError.new(field: 'infected') unless segment
 
     find_number(segment: segment, type: :max)
@@ -59,7 +62,7 @@ class BulgariaVMACasesScraper < CasesScraper
 
     find_minimum_distance_number(
       segment: segment,
-      needle: MEN_SEGMENT_NEEDLE
+      needle: MEN
     )
   end
 
@@ -72,7 +75,7 @@ class BulgariaVMACasesScraper < CasesScraper
 
     find_minimum_distance_number(
       segment: segment,
-      needle: WOMEN_SEGMENT_NEEDLE
+      needle: WOMEN
     )
   end
 
@@ -116,27 +119,7 @@ class BulgariaVMACasesScraper < CasesScraper
   private
 
   def article_text
-    # @article_text ||= parse.xpath(ARTICLE_CONTAINER_XPATH).text
-
-    @article_text ||= '522 са общо случаите на COVID-19 у нас (актуална информация към 5 април, 08.00 часа)
-05.04.2020
-
-
-522 са потвърдените случаи на COVID-19 у нас по данни на Националния оперативен щаб. Броят на починалите е 18, а 37 са излекуваните.
-
-Последните положителни проби са констатирани в София (13 случая), Стара Загора (3 случая), Бургас (1 случай), Перник (2 случая), Сливен (2 случая), Русе (1 случай), Пловдив (1 случай) и Кърджали (1 случай).
-
-192 са лицата с потвърден COVID-19, които са настанени под лекарско наблюдение в болнични условия, като 26 от тях са в интензивни структури.
-
-От всички 522 диагностицирани – 299 (57%) са мъже и 223 (43%) жени.
-
-Най-възрастният пациент е на 86 години, а най-малкият – на 1 година.
-
-Регистрираните случаи по административни области са както следва: Благоевград – 15; Бургас – 24; Варна – 24; Велико Търново – 4; Видин – 2; Враца – 1; Габрово – 2; Добрич – 11; Кърджали – 9; Кюстендил – 7; Ловеч – 2; Монтана – 18; Пазарджик – 10; Перник – 8; Плевен – 9; Пловдив – 30; Русе – 2; Силистра – 2; Сливен – 8; Смолян –13; София – 308; Стара Загора – 7; Хасково – 1; Шумен – 4.
-
-Общият брой на потвърдените случаи на COVID-19 при лица-медицински служители е 23 души.
-
-Снимка: ВМА'
+    @article_text ||= parse.css(ARTICLE_CONTAINER_CSS).text
   end
 
   def article_segments
