@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+require_relative '../config/application'
+
+CovidScraper::Application.finalize!
+
+require 'pry'
+binding.pry
