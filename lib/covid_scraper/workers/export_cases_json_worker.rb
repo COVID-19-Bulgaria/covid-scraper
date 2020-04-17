@@ -27,14 +27,22 @@ module CovidScraper
 
         write_file(
           filename: build_database_file_path(country.name, DATE_CASES_FILENAME),
-          data: date_cases_repository.by_country_name(country.name)
-                                     .map_with(:json_mapper).to_a.to_json
+          data: Hash[
+                  date_cases_repository
+                    .by_country_name(country.name)
+                    .map_with(:json_mapper)
+                    .to_a
+                ].to_json
         )
 
         write_file(
           filename: build_database_file_path(country.name, DATE_DIFF_CASES_FILENAME),
-          data: date_diff_cases_repository.by_country_name(country.name)
-                                          .map_with(:json_mapper).to_a.to_json
+          data: Hash[
+                  date_diff_cases_repository
+                    .by_country_name(country.name)
+                    .map_with(:json_mapper)
+                    .to_a
+                ].to_json
         )
 
         PublishDatasetsWorker.perform_async
