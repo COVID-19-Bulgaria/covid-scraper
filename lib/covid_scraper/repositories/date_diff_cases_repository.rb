@@ -11,7 +11,7 @@ module CovidScraper
       end
 
       def by_country_name(country_name)
-        date_cases.where(country: country_name)
+        date_diff_cases.where(country: country_name)
       end
     end
   end
