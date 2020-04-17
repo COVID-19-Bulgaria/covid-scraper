@@ -22,6 +22,8 @@ module CovidScraper
                   .by_country_id(country.id)
                   .map_with(:latest_places_cases_mapper)
                   .to_a
+                  .reduce(&:merge)
+                  .to_json
         )
 
         PublishDatasetsWorker.perform_async

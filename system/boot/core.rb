@@ -16,6 +16,7 @@ CovidScraper::Application.boot(:core) do
     require 'delegate'
     require 'sidekiq'
     require 'sidekiq/web'
+    require 'sidekiq-cron'
     require 'sidekiq/cron/web'
 
     module Types
