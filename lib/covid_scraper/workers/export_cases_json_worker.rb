@@ -22,7 +22,7 @@ module CovidScraper
 
         write_file(
           filename: build_database_file_path(country.name, TOTALS_DATASET_FILENAME),
-          data: cases_repository.latest(country.id)
+          data: cases_repository.latest(country.id).to_h.to_json
         )
 
         write_file(
