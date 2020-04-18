@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 
 git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 
+gem 'dotenv', '~> 2.7', '>= 2.7.5'
 gem 'dry-auto_inject', '~> 0.7.0'
 gem 'dry-monads', '~> 1.3', '>= 1.3.5'
 gem 'dry-system', '~> 0.17.0'

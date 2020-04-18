@@ -16,7 +16,7 @@ module CovidScraper
       FATAL_CONTAINER_XPATH =
         '//*[@id="top"]/div/div/div[1]/table/tbody/tr[2]/td[2]/span'
 
-      def initialize
+      def initialize(_class_params)
         super(country: COUNTRY_IDENTIFIER, uri: WEBSITE_URI)
       end
 

@@ -1,5 +1,8 @@
 #!/usr/bin/env ruby
 
+require 'dotenv'
+Dotenv.load('.env')
+
 require_relative '../config/application'
 
 CovidScraper::Application.finalize!
