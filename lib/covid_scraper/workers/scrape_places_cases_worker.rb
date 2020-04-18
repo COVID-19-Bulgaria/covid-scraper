@@ -12,14 +12,16 @@ module CovidScraper
 
       sidekiq_options queue: :scraping, retry: 0, backtrace: true
 
-      def perform(class_name)
+      def perform(class_name, class_params = {})
         scraper_class = Object.const_get(class_name)
-        scraper = scraper_class.new
+        scraper = scraper_class.new(class_params)
 
         country = countries_repository.by_name(scraper.country).first
         scraped_places_cases = scraper.regions_cases
 
-        return unless update_places_cases(country.id, scraped_places_cases)
+        return unless update_places_cases(country.id,
+                                          scraped_places_cases,
+                                          class_params[:website_uri])
 
         ExportPlacesJsonWorker.perform_async(scraper.country)
       end
@@ -35,15 +37,15 @@ module CovidScraper
         end
       end
 
-      def update_places_cases(country_id, scraped_places_cases)
+      def update_places_cases(country_id, scraped_places_cases, sources = nil)
         has_changed = false
 
         scraped_places_cases.each do |place, cases|
           latest_place_cases = latest_places_cases_repository
                                .by_country_id_and_name(country_id, place)
 
-          next unless latest_places_cases &&
-                      latest_places_cases.infected != cases
+          next unless latest_place_cases &&
+                      latest_place_cases.infected != cases
 
           insert_places_case(
             {
@@ -51,6 +53,7 @@ module CovidScraper
               infected: cases,
               cured: latest_place_cases.cured,
               fatal: latest_place_cases.fatal,
+              sources: sources,
               timestamp: Time.now
             }
           )

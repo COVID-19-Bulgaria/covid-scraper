@@ -20,7 +20,7 @@ module CovidScraper
       REGIONS_CASES_SEGMENT_NEEDLE = 'Регистрираните случаи по административни области са както следва ;'
       MEDICAL_STAFF_NEEDLE = 'медицински служители'
 
-      def initialize
+      def initialize(_class_params)
         super(country: COUNTRY_IDENTIFIER, uri: WEBSITE_URI)
       end
 

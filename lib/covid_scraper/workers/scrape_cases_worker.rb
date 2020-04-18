@@ -11,9 +11,9 @@ module CovidScraper
 
       sidekiq_options queue: :scraping, retry: 2, backtrace: true
 
-      def perform(class_name)
+      def perform(class_name, class_params = {})
         scraper_class = Object.const_get(class_name)
-        scraper = scraper_class.new
+        scraper = scraper_class.new(class_params)
 
         country = countries_repository.by_name(scraper.country).first
         latest_cases = cases_repository.latest(country.id)
