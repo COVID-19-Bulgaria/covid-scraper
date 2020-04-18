@@ -24,6 +24,13 @@ jobs = [
     args: ['CovidScraper::Scrapers::BulgariaVMACasesScraper']
   },
   {
+    name: 'ExportCases',
+    cron: '0 18 * * * Europe/Sofia',
+    class: 'CovidScraper::Workers::ExportCasesJsonWorker',
+    args: ['Bulgaria'],
+    status: 'disabled'
+  },
+  {
     name: 'ExportPlacesCases',
     cron: '0 18 * * * Europe/Sofia',
     class: 'CovidScraper::Workers::ExportPlacesJsonWorker',
