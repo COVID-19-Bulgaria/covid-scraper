@@ -146,6 +146,8 @@ module CovidScraper
           count_index = index if item == count
         end
 
+
+
         (word_index - count_index).abs
       end
 
@@ -164,7 +166,7 @@ module CovidScraper
       end
 
       def find_minimum_distance_number(segment:, needle:)
-        numbers = segment.scan(/\d+/)
+        numbers = segment.scan(/\d+/).filter { |number| number != '19' }
         tokens = tokenizer.tokenize(segment)
         numbers_distance = numbers_distance(numbers, tokens, needle)
 
