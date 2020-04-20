@@ -3,6 +3,7 @@
 module CovidScraper
   module Workers
     class ExportCasesJsonWorker
+      include Import['container']
       include Import['repositories.countries_repository']
       include Import['repositories.cases_repository']
       include Import['repositories.date_cases_repository']
@@ -18,6 +19,8 @@ module CovidScraper
       DATE_DIFF_CASES_FILENAME = 'DateDiffCasesDataset.json'
 
       def perform(country_name)
+        container.disconnect
+
         country = countries_repository.by_name(country_name).first
 
         write_file(
