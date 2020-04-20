@@ -19,9 +19,14 @@ module CovidScraper
         latest_cases = cases_repository.latest(country.id)
         scraped_cases = scraper.scrape(country.id)
 
-        return if scraper.cases_match(latest_cases, scraped_cases)
+        return if scraper.cases_match?(latest_cases, scraped_cases) ||
+                  !scraper.new_data?(latest_cases, scraped_cases)
 
-        create_case(scraped_cases.to_h, scraper.country)
+        cases_input = fill_missing_data_with_latest_known(
+          latest_cases, scraped_cases
+        ).to_h
+
+        create_case(cases_input, scraper.country)
       end
 
       private
@@ -36,6 +41,14 @@ module CovidScraper
           errors = result.failure.errors.to_h
           raise "An error occurred when creating case: #{errors}"
         end
+      end
+
+      def fill_missing_data_with_latest_known(latest_known, scraped_cases)
+        CovidScraper::Entities::Case.new(
+          latest_known.attributes
+                      .filter { |key, _| !%i[id timestamp].include?(key) }
+                      .merge(scraped_cases.attributes)
+        )
       end
     end
   end

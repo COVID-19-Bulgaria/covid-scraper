@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module CovidScraper
-  class DateDiffCase < DateCase
+  module Entities
+    class DateDiffCase < DateCase
+    end
   end
 end
