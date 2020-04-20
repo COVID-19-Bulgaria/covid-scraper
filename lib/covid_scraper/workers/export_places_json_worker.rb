@@ -3,6 +3,7 @@
 module CovidScraper
   module Workers
     class ExportPlacesJsonWorker
+      include Import['container']
       include Import['repositories.latest_places_cases_repository']
       include Import['repositories.countries_repository']
 
@@ -14,6 +15,8 @@ module CovidScraper
       PLACES_CASES_FILENAME = 'GeoDataset.json'
 
       def perform(country_name)
+        container.disconnect
+
         country = countries_repository.by_name(country_name).first
 
         write_file(

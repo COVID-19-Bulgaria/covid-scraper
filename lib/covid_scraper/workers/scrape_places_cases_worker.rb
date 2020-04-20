@@ -3,6 +3,7 @@
 module CovidScraper
   module Workers
     class ScrapePlacesCasesWorker
+      include Import['container']
       include Import['repositories.latest_places_cases_repository']
       include Import['repositories.countries_repository']
       include Import['transactions.places_cases.create_places_case']
@@ -13,6 +14,8 @@ module CovidScraper
       sidekiq_options queue: :scraping, retry: 0, backtrace: true
 
       def perform(class_name, class_params = {})
+        container.disconnect
+
         scraper_class = Object.const_get(class_name)
         scraper = scraper_class.new(class_params)
 
