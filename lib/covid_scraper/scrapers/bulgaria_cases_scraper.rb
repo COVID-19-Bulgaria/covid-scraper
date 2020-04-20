@@ -33,7 +33,7 @@ module CovidScraper
       end
 
       def scrape(country_id)
-        Case.new(
+        CovidScraper::Entities::Case.new(
           country_id: country_id,
           infected: infected,
           cured: cured,
@@ -42,12 +42,18 @@ module CovidScraper
         )
       end
 
-      def cases_match(first, second)
+      def cases_match?(first, second)
         first.country_id == second.country_id &&
           first.infected == second.infected &&
           first.cured == second.cured &&
           first.fatal == second.fatal &&
           Date.parse(first.timestamp.to_s) == Date.parse(second.timestamp.to_s)
+      end
+
+      def new_data?(latest_cases, scraped_cases)
+        latest_cases.infected < scraped_cases.infected ||
+          latest_cases.cured < scraped_cases.cured ||
+          latest_cases.fatal < scraped_cases.fatal
       end
     end
   end

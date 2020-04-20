@@ -6,6 +6,11 @@ CovidScraper::Application.boot(:db) do
     require 'rom-sql'
     require 'rom/transformer'
 
-    register('db.config', ROM::Configuration.new(:sql, ENV['DATABASE_URL']))
+    register('db.config', ROM::Configuration.new(
+      :sql, ENV['DATABASE_URL'],
+      extensions: [
+        :connection_validator
+      ]
+    ))
   end
 end
