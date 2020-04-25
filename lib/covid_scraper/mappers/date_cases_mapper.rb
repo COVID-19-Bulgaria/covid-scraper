@@ -7,26 +7,20 @@ module CovidScraper
       register_as :json_mapper
 
       def call(cases)
-        document = { infected: {}, cured: {}, fatal: {} }
+        data_points = %i[infected cured fatal hospitalized intensive_care
+                         medical_staff].freeze
+
+        document = {}
+        data_points.each { |point| document[point] = {} }
 
         cases.each do |date_cases|
-          document[:infected].merge!({
-                                       date_cases.date => {
-                                         cases: date_cases.infected
-                                       }
-                                     })
-
-          document[:cured].merge!({
-                                    date_cases.date => {
-                                      cases: date_cases.cured
-                                    }
-                                  })
-
-          document[:fatal].merge!({
-                                    date_cases.date => {
-                                      cases: date_cases.fatal
-                                    }
-                                  })
+          data_points.each do |point|
+            document[point].merge!({
+                                     date_cases.date => {
+                                       cases: date_cases.send(point)
+                                     }
+                                   })
+          end
         end
 
         document
