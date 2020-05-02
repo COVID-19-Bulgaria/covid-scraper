@@ -96,7 +96,9 @@ module CovidScraper
         segment = fuzzy_match.find(REGIONS_CASES_SEGMENT_NEEDLE)
         raise ArticleSegmentationError.new(field: 'regions_cases') unless segment
 
-        raw_pairs = segment.split(':')[1].split(';')
+        normalized_segment = segment.gsub(',', ';')
+
+        raw_pairs = normalized_segment.split(':')[1].split(';')
         regions_cases_hash = {}
 
         raw_pairs.each do |raw_pair|
