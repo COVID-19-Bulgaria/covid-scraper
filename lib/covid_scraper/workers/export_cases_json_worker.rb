@@ -8,6 +8,7 @@ module CovidScraper
       include Import['repositories.cases_repository']
       include Import['repositories.date_cases_repository']
       include Import['repositories.date_diff_cases_repository']
+      include Import['repositories.date_active_cases_repository']
 
       include FileHelpers
 
@@ -17,6 +18,7 @@ module CovidScraper
       TOTALS_DATASET_FILENAME = 'TotalsDataset.json'
       DATE_CASES_FILENAME = 'DateCasesDataset.json'
       DATE_DIFF_CASES_FILENAME = 'DateDiffCasesDataset.json'
+      DATE_ACTIVE_CASES_FILENAME = 'DateActiveCasesDataset.json'
 
       def perform(country_name)
         container.disconnect
@@ -42,6 +44,16 @@ module CovidScraper
           filename: build_database_file_path(country.name, DATE_DIFF_CASES_FILENAME),
           data: Hash[
                   date_diff_cases_repository
+                    .by_country_name(country.name)
+                    .map_with(:json_mapper)
+                    .to_a
+                ].to_json
+        )
+
+        write_file(
+          filename: build_database_file_path(country.name, DATE_ACTIVE_CASES_FILENAME),
+          data: Hash[
+                  date_active_cases_repository
                     .by_country_name(country.name)
                     .map_with(:json_mapper)
                     .to_a
