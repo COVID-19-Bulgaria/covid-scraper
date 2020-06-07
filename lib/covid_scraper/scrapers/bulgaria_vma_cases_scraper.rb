@@ -148,8 +148,6 @@ module CovidScraper
           count_index = index if item == count
         end
 
-
-
         (word_index - count_index).abs
       end
 

@@ -13,6 +13,7 @@ module CovidScraper
           optional(:hospitalized).value(:integer)
           optional(:intensive_care).value(:integer)
           optional(:medical_staff).value(:integer)
+          optional(:pcr_tests).value(:integer)
           required(:timestamp).filled(:time)
           required(:country_id).filled(:integer)
         end
