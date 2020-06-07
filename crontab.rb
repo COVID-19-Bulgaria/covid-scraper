@@ -7,21 +7,22 @@ CovidScraper::Application.finalize!
 jobs = [
   {
     name: 'BulgariaCasesScraper',
-    cron: '*/15 * * * * Europe/Sofia',
+    cron: '*/15 8,9,10,11,17,18,19,20,0 * * * Europe/Sofia',
     class: 'CovidScraper::Workers::ScrapeCasesWorker',
-    args: ['CovidScraper::Scrapers::BulgariaCasesScraper']
+    args: ['CovidScraper::Scrapers::BulgariaPortalCasesScraper']
+  },
+  {
+    name: 'BulgariaPlacesCasesScraper',
+    cron: '*/15 8,9,10,11,17,18,19,20,0 * * * Europe/Sofia',
+    class: 'CovidScraper::Workers::ScrapePlacesCasesWorker',
+    args: ['CovidScraper::Scrapers::BulgariaPortalCasesScraper']
   },
   {
     name: 'BulgariaVMACasesScraper',
     cron: '*/15 8,9,10,11,17,18,19,20 * * * Europe/Sofia',
     class: 'CovidScraper::Workers::ScrapeCasesWorker',
-    args: ['CovidScraper::Scrapers::BulgariaVMACasesScraper']
-  },
-  {
-    name: 'BulgariaPlacesCasesScraper',
-    cron: '*/15 8,9,17,18 * * * Europe/Sofia',
-    class: 'CovidScraper::Workers::ScrapePlacesCasesWorker',
-    args: ['CovidScraper::Scrapers::BulgariaVMACasesScraper']
+    args: ['CovidScraper::Scrapers::BulgariaVMACasesScraper'],
+    status: 'disabled'
   },
   {
     name: 'ExportCases',
