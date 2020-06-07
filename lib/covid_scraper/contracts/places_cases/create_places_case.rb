@@ -9,7 +9,7 @@ module CovidScraper
           required(:infected).filled(:integer)
           required(:cured).filled(:integer)
           required(:fatal).filled(:integer)
-          optional(:sources).value(:string)
+          optional(:sources).maybe(:string)
           required(:timestamp).filled(:time)
         end
       end
