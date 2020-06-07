@@ -74,6 +74,14 @@ module CovidScraper
         regions_cases_hash
       end
 
+      def men
+        nil
+      end
+
+      def women
+        nil
+      end
+
       private
 
       def statistics_container
