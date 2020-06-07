@@ -117,6 +117,10 @@ module CovidScraper
         find_number(segment: segment, type: :max)
       end
 
+      def pcr_tests
+        nil
+      end
+
       private
 
       def article_text
