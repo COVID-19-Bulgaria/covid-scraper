@@ -18,7 +18,7 @@ module CovidScraper
       PCR_TESTS_CSS = 'div:nth-child(1) > p.statistics-value'
       REGIONS_CASES_CSS = 'div:nth-child(2) > table > tbody > tr'
       REGIONS_CASES_REGION_CSS = 'td:first-child'
-      REGIONS_CASES_CASES_CSS = 'td:last-child'
+      REGIONS_CASES_CASES_CSS = 'td:nth-child(2)'
 
       def initialize(_class_params)
         super(country: COUNTRY_IDENTIFIER, uri: WEBSITE_URI)
