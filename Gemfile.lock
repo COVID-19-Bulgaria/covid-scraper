@@ -96,7 +96,7 @@ GEM
       coderay (~> 1.1)
       method_source (~> 1.0)
     raabro (1.1.6)
-    rack (2.2.2)
+    rack (2.2.3)
     rack-protection (2.0.8.1)
       rack
     rainbow (3.0.0)
@@ -187,7 +187,7 @@ DEPENDENCIES
   pragmatic_segmenter (~> 0.3.22)
   pragmatic_tokenizer (~> 3.0, >= 3.0.7)
   pry
-  rack (~> 2.2, >= 2.2.2)
+  rack (~> 2.2)
   rake (~> 13.0, >= 13.0.1)
   rom (~> 5.2, >= 5.2.2)
   rom-sql (~> 3.2)
