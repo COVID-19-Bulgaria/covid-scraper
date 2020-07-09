@@ -12,7 +12,7 @@ module CovidScraper
         data.each do |item|
           document.merge!({
                            item.date => {
-                             percentage: item.positive_percentage
+                             percentage: item.positive_percentage.to_f
                            }
                          })
         end
