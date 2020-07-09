@@ -9,6 +9,7 @@ module CovidScraper
       include Import['repositories.date_cases_repository']
       include Import['repositories.date_diff_cases_repository']
       include Import['repositories.date_active_cases_repository']
+      include Import['repositories.date_positive_tests_repository']
 
       include FileHelpers
 
@@ -19,17 +20,32 @@ module CovidScraper
       DATE_CASES_FILENAME = 'DateCasesDataset.json'
       DATE_DIFF_CASES_FILENAME = 'DateDiffCasesDataset.json'
       DATE_ACTIVE_CASES_FILENAME = 'DateActiveCasesDataset.json'
+      DATE_POSITIVE_TESTS_FILENAME = 'DatePositiveTestsDataset.json'
 
       def perform(country_name)
         container.disconnect
 
         country = countries_repository.by_name(country_name).first
 
+        write_totals_dataset_file(country)
+        write_date_cases_file(country)
+        write_date_diff_cases_file(country)
+        write_date_active_cases_file(country)
+        write_positive_tests_file(country)
+
+        PublishDatasetsWorker.perform_async
+      end
+
+      private
+
+      def write_totals_dataset_file(country)
         write_file(
           filename: build_database_file_path(country.name, TOTALS_DATASET_FILENAME),
           data: cases_repository.latest(country.id).to_h.to_json
         )
+      end
 
+      def write_date_cases_file(country)
         write_file(
           filename: build_database_file_path(country.name, DATE_CASES_FILENAME),
           data: Hash[
@@ -39,7 +55,9 @@ module CovidScraper
                     .to_a
                 ].to_json
         )
+      end
 
+      def write_date_diff_cases_file(country)
         write_file(
           filename: build_database_file_path(country.name, DATE_DIFF_CASES_FILENAME),
           data: Hash[
@@ -49,7 +67,9 @@ module CovidScraper
                     .to_a
                 ].to_json
         )
+      end
 
+      def write_date_active_cases_file(country)
         write_file(
           filename: build_database_file_path(country.name, DATE_ACTIVE_CASES_FILENAME),
           data: Hash[
@@ -59,8 +79,18 @@ module CovidScraper
                     .to_a
                 ].to_json
         )
+      end
 
-        PublishDatasetsWorker.perform_async
+      def write_positive_tests_file(country)
+        write_file(
+          filename: build_database_file_path(country.name, DATE_POSITIVE_TESTS_FILENAME),
+          data: Hash[
+                  date_positive_tests_repository
+                    .by_country_name(country.name)
+                    .map_with(:json_mapper)
+                    .to_a
+                ].to_json
+        )
       end
     end
   end
