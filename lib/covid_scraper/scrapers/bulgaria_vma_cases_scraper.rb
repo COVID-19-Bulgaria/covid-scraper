@@ -121,6 +121,10 @@ module CovidScraper
         nil
       end
 
+      def antigen_tests
+        nil
+      end
+
       private
 
       def article_text
