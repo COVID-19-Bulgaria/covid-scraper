@@ -55,6 +55,10 @@ module CovidScraper
         raise 'Override with actual implementation'
       end
 
+      def antigen_tests
+        raise 'Override with actual implementation'
+      end
+
       def scrape(country_id)
         CovidScraper::Entities::Case.new(
           country_id: country_id,
@@ -67,6 +71,7 @@ module CovidScraper
           intensive_care: intensive_care,
           medical_staff: medical_staff,
           pcr_tests: pcr_tests,
+          antigen_tests: antigen_tests,
           timestamp: Time.now
         )
       end
@@ -82,6 +87,7 @@ module CovidScraper
           first.intensive_care == second.intensive_care &&
           first.medical_staff == second.medical_staff &&
           first.pcr_tests == second.pcr_tests &&
+          first.antigen_tests == second.antigen_tests &&
           Date.parse(first.timestamp.to_s) == Date.parse(second.timestamp.to_s)
       end
 
@@ -94,7 +100,8 @@ module CovidScraper
           latest_cases.hospitalized != scraped_cases.hospitalized ||
           latest_cases.intensive_care != scraped_cases.intensive_care ||
           latest_cases.medical_staff != scraped_cases.medical_staff ||
-          latest_cases.pcr_tests < scraped_cases.pcr_tests
+          latest_cases.pcr_tests < scraped_cases.pcr_tests ||
+          latest_cases.antigen_tests < scraped_cases.antigen_tests
       end
 
       private

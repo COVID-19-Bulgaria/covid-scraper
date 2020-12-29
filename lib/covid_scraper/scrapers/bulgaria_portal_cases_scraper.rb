@@ -12,10 +12,11 @@ module CovidScraper
       INFECTED_CSS = 'p.confirmed'
       CURED_CSS = 'p.healed'
       FATAL_CSS = 'p.deceased'
-      HOSPITALIZED_CSS = 'div:nth-child(3) > p.statistics-value'
-      INTENSIVE_CARE_CSS = 'div:nth-child(3) > p.statistics-subvalue'
-      MEDICAL_STAFF_CSS = 'div:nth-child(3) > table > tbody > tr:last-child > td:last-child'
-      PCR_TESTS_CSS = 'div:nth-child(1) > p.statistics-value'
+      HOSPITALIZED_CSS = 'div:nth-child(4) > p.statistics-value'
+      INTENSIVE_CARE_CSS = 'div:nth-child(4) > p.statistics-subvalue'
+      MEDICAL_STAFF_CSS = 'div:nth-child(4) > table > tbody > tr:last-child > td:last-child'
+      PCR_TESTS_CSS = 'div:nth-child(3) > table:nth-child(3) > tbody > tr:nth-child(1) > td:nth-child(2)'
+      ANTIGEN_TESTS_CSS = 'div:nth-child(3) > table:nth-child(3) > tbody > tr:nth-child(2) > td:nth-child(2)'
       REGIONS_CASES_CSS = 'div:nth-child(2) > table > tbody > tr'
       REGIONS_CASES_REGION_CSS = 'td:first-child'
       REGIONS_CASES_CASES_CSS = 'td:nth-child(2)'
@@ -50,6 +51,10 @@ module CovidScraper
 
       def pcr_tests
         get_raw_text(PCR_TESTS_CSS, 'pcr_tests')
+      end
+
+      def antigen_tests
+        get_raw_text(ANTIGEN_TESTS_CSS, 'antigen_tests')
       end
 
       def regions_cases

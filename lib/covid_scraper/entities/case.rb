@@ -14,6 +14,7 @@ module CovidScraper
       attribute? :intensive_care, Types::Coercible::Integer.optional
       attribute? :medical_staff, Types::Coercible::Integer.optional
       attribute? :pcr_tests, Types::Coercible::Integer.optional
+      attribute? :antigen_tests, Types::Coercible::Integer.optional
       attribute? :sources, Types::Coercible::String.optional
       attribute :timestamp, Types::Nominal::Time
     end
