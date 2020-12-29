@@ -50,11 +50,11 @@ module CovidScraper
       end
 
       def pcr_tests
-        get_raw_text(PCR_TESTS_CSS, 'pcr_tests')
+        get_raw_text(PCR_TESTS_CSS, 'pcr_tests', other_statistics_container)
       end
 
       def antigen_tests
-        get_raw_text(ANTIGEN_TESTS_CSS, 'antigen_tests')
+        get_raw_text(ANTIGEN_TESTS_CSS, 'antigen_tests', other_statistics_container)
       end
 
       def regions_cases
