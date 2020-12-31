@@ -8,7 +8,7 @@ module CovidScraper
 
       def call(cases)
         data_points = %i[infected cured fatal hospitalized intensive_care
-                         medical_staff pcr_tests antigen_tests].freeze
+                         medical_staff pcr_tests antigen_tests vaccinated].freeze
 
         document = {}
         data_points.each { |point| document[point] = {} }

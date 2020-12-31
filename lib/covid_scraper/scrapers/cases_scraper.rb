@@ -27,6 +27,10 @@ module CovidScraper
         raise 'Override with actual implementation.'
       end
 
+      def vaccinated
+        raise 'Override with actual implementation.'
+      end
+
       def men
         raise 'Override with actual implementation.'
       end
@@ -72,6 +76,7 @@ module CovidScraper
           medical_staff: medical_staff,
           pcr_tests: pcr_tests,
           antigen_tests: antigen_tests,
+          vaccinated: vaccinated,
           timestamp: Time.now
         )
       end
@@ -88,6 +93,7 @@ module CovidScraper
           first.medical_staff == second.medical_staff &&
           first.pcr_tests == second.pcr_tests &&
           first.antigen_tests == second.antigen_tests &&
+          first.vaccinated == second.vaccinated &&
           Date.parse(first.timestamp.to_s) == Date.parse(second.timestamp.to_s)
       end
 
@@ -101,7 +107,8 @@ module CovidScraper
           latest_cases.intensive_care != scraped_cases.intensive_care ||
           latest_cases.medical_staff != scraped_cases.medical_staff ||
           latest_cases.pcr_tests < scraped_cases.pcr_tests ||
-          latest_cases.antigen_tests < scraped_cases.antigen_tests
+          latest_cases.antigen_tests < scraped_cases.antigen_tests ||
+          latest_cases.vaccinated < scraped_cases.vaccinated
       end
 
       private

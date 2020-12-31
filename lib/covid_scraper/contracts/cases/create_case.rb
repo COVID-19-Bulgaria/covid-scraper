@@ -15,6 +15,7 @@ module CovidScraper
           optional(:medical_staff).maybe(:integer)
           optional(:pcr_tests).maybe(:integer)
           optional(:antigen_tests).maybe(:integer)
+          optional(:vaccinated).maybe(:integer)
           required(:timestamp).filled(:time)
           required(:country_id).filled(:integer)
         end
