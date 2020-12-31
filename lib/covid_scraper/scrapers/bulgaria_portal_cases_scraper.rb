@@ -12,11 +12,12 @@ module CovidScraper
       INFECTED_CSS = 'p.confirmed'
       CURED_CSS = 'p.healed'
       FATAL_CSS = 'p.deceased'
+      VACCINATED_CSS = 'div:nth-child(6) > p.statistics-value'
       HOSPITALIZED_CSS = 'div:nth-child(4) > p.statistics-value'
       INTENSIVE_CARE_CSS = 'div:nth-child(4) > p.statistics-subvalue'
-      MEDICAL_STAFF_CSS = 'div:nth-child(4) > table > tbody > tr:last-child > td:last-child'
-      PCR_TESTS_CSS = 'div:nth-child(3) > table:nth-child(3) > tbody > tr:nth-child(1) > td:nth-child(2)'
-      ANTIGEN_TESTS_CSS = 'div:nth-child(3) > table:nth-child(3) > tbody > tr:nth-child(2) > td:nth-child(2)'
+      MEDICAL_STAFF_CSS = 'div:nth-child(1) > table:nth-child(6) > tbody > tr:last-child > td:last-child'
+      PCR_TESTS_CSS = 'div:nth-child(1) > div.col.stats.double > table:nth-child(3) > tbody > tr:nth-child(1) > td:nth-child(2)'
+      ANTIGEN_TESTS_CSS = 'div:nth-child(1) > div.col.stats.double > table:nth-child(3) > tbody > tr:nth-child(2) > td:nth-child(2)'
       REGIONS_CASES_CSS = 'div:nth-child(2) > table > tbody > tr'
       REGIONS_CASES_REGION_CSS = 'td:first-child'
       REGIONS_CASES_CASES_CSS = 'td:nth-child(2)'
@@ -35,6 +36,10 @@ module CovidScraper
 
       def fatal
         get_raw_text(FATAL_CSS, 'fatal')
+      end
+
+      def vaccinated
+        get_raw_text(VACCINATED_CSS, 'vaccinated')
       end
 
       def hospitalized

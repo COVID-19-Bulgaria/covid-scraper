@@ -125,6 +125,10 @@ module CovidScraper
         nil
       end
 
+      def vaccinated
+        nil
+      end
+
       private
 
       def article_text
