@@ -9,8 +9,8 @@ module CovidScraper
       WEBSITE_URI = 'https://coronavirus.bg/bg/statistika'
       STATISTICS_CONTAINER_CSS = 'div.main-content'
       MEDICAL_STAFF_CSS = 'div:nth-child(1) > table:nth-child(6) > tbody > tr:last-child > td:last-child'
-      PCR_TESTS_CSS = 'div:nth-child(1) > div.col.stats.double > table:nth-child(3) > tbody > tr:nth-child(1) > td:nth-child(2)'
-      ANTIGEN_TESTS_CSS = 'div:nth-child(1) > div.col.stats.double > table:nth-child(3) > tbody > tr:nth-child(2) > td:nth-child(2)'
+      PCR_TESTS_CSS = 'div:nth-child(1) > table:nth-child(9) > tbody > tr:nth-child(1) > td:nth-child(2)'
+      ANTIGEN_TESTS_CSS = 'div:nth-child(1) > table:nth-child(9) > tbody > tr:nth-child(2) > td:nth-child(2)'
       REGIONS_CASES_CSS = 'div:nth-child(2) > table > tbody > tr'
       REGIONS_CASES_REGION_CSS = 'td:first-child'
       REGIONS_CASES_CASES_CSS = 'td:nth-child(2)'
@@ -34,7 +34,7 @@ module CovidScraper
       def regions_cases
         raw_regions_cases = statistics_container.css(REGIONS_CASES_CSS)
 
-        raise ArticleSegmentationError.new(field: 'regions_cases') if !raw_regions_cases || raw_regions_cases.empty?
+        raise CovidScraper::Scrapers::Exceptions::ArticleSegmentationError.new(field: 'regions_cases') if !raw_regions_cases || raw_regions_cases.empty?
 
         regions_cases_hash = {}
 
@@ -62,7 +62,7 @@ module CovidScraper
       def get_raw_text(selector, field_name, container = statistics_container)
         raw_cases = container.css(selector).text
 
-        raise ArticleSegmentationError.new(field: field_name) if !raw_cases || raw_cases.empty?
+        raise CovidScraper::Scrapers::Exceptions::ArticleSegmentationError.new(field: field_name) if !raw_cases || raw_cases.empty?
 
         raw_cases
       end

@@ -78,7 +78,7 @@ module CovidScraper
       def get_raw_text(selector, field_name, container = statistics_container)
         raw_cases = container.css(selector).text
 
-        raise ArticleSegmentationError.new(field: field_name) if !raw_cases || raw_cases.empty?
+        raise CovidScraper::Scrapers::Exceptions::ArticleSegmentationError.new(field: field_name) if !raw_cases || raw_cases.empty?
 
         raw_cases
       end
