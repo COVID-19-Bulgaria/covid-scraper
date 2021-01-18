@@ -41,7 +41,7 @@ module CovidScraper
       end
 
       def medical_staff
-        parse['']
+        nil
       end
 
       def pcr_tests

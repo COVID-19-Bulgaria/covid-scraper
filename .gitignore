@@ -2,3 +2,5 @@
 test.rb
 .env
 temp.sql
+.rakeTasks
+.idea

@@ -4,17 +4,10 @@ require_relative './cases_scraper'
 
 module CovidScraper
   module Scrapers
-    class BulgariaPortalCasesScraper < CasesScraper
+    class BulgariaPortalOtherCasesScraper < CasesScraper
       COUNTRY_IDENTIFIER = 'Bulgaria'
       WEBSITE_URI = 'https://coronavirus.bg/bg/statistika'
-      STATISTICS_CONTAINER_CSS = 'div.statistics-container'
-      OTHER_STATISTICS_CONTAINER_CSS = 'div.main-content'
-      INFECTED_CSS = 'p.confirmed'
-      CURED_CSS = 'p.healed'
-      FATAL_CSS = 'p.deceased'
-      VACCINATED_CSS = 'div:nth-child(6) > p.statistics-value'
-      HOSPITALIZED_CSS = 'div:nth-child(4) > p.statistics-value'
-      INTENSIVE_CARE_CSS = 'div:nth-child(4) > p.statistics-subvalue'
+      STATISTICS_CONTAINER_CSS = 'div.main-content'
       MEDICAL_STAFF_CSS = 'div:nth-child(1) > table:nth-child(6) > tbody > tr:last-child > td:last-child'
       PCR_TESTS_CSS = 'div:nth-child(1) > div.col.stats.double > table:nth-child(3) > tbody > tr:nth-child(1) > td:nth-child(2)'
       ANTIGEN_TESTS_CSS = 'div:nth-child(1) > div.col.stats.double > table:nth-child(3) > tbody > tr:nth-child(2) > td:nth-child(2)'
@@ -26,44 +19,20 @@ module CovidScraper
         super(country: COUNTRY_IDENTIFIER, uri: WEBSITE_URI)
       end
 
-      def infected
-        get_raw_text(INFECTED_CSS, 'infected')
-      end
-
-      def cured
-        get_raw_text(CURED_CSS, 'cured')
-      end
-
-      def fatal
-        get_raw_text(FATAL_CSS, 'fatal')
-      end
-
-      def vaccinated
-        get_raw_text(VACCINATED_CSS, 'vaccinated')
-      end
-
-      def hospitalized
-        get_raw_text(HOSPITALIZED_CSS, 'hospitalized')
-      end
-
-      def intensive_care
-        get_raw_text(INTENSIVE_CARE_CSS, 'intensive_care')
-      end
-
       def medical_staff
-        get_raw_text(MEDICAL_STAFF_CSS, 'medical_staff', other_statistics_container)
+        get_raw_text(MEDICAL_STAFF_CSS, 'medical_staff', statistics_container)
       end
 
       def pcr_tests
-        get_raw_text(PCR_TESTS_CSS, 'pcr_tests', other_statistics_container)
+        get_raw_text(PCR_TESTS_CSS, 'pcr_tests', statistics_container)
       end
 
       def antigen_tests
-        get_raw_text(ANTIGEN_TESTS_CSS, 'antigen_tests', other_statistics_container)
+        get_raw_text(ANTIGEN_TESTS_CSS, 'antigen_tests', statistics_container)
       end
 
       def regions_cases
-        raw_regions_cases = other_statistics_container.css(REGIONS_CASES_CSS)
+        raw_regions_cases = statistics_container.css(REGIONS_CASES_CSS)
 
         raise ArticleSegmentationError.new(field: 'regions_cases') if !raw_regions_cases || raw_regions_cases.empty?
 
@@ -84,22 +53,10 @@ module CovidScraper
         regions_cases_hash
       end
 
-      def men
-        nil
-      end
-
-      def women
-        nil
-      end
-
       private
 
       def statistics_container
         @statistics_container ||= parse.css(STATISTICS_CONTAINER_CSS)
-      end
-
-      def other_statistics_container
-        @other_statistics_container ||= parse.css(OTHER_STATISTICS_CONTAINER_CSS)
       end
 
       def get_raw_text(selector, field_name, container = statistics_container)
