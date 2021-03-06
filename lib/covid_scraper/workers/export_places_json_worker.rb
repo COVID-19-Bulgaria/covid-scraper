@@ -6,6 +6,9 @@ module CovidScraper
       include Import['container']
       include Import['repositories.latest_places_cases_repository']
       include Import['repositories.countries_repository']
+      include Import['repositories.date_places_cases_repository']
+      include Import['repositories.date_diff_places_cases_repository']
+      include Import['repositories.week_places_cases_repository']
 
       include FileHelpers
 
@@ -13,6 +16,9 @@ module CovidScraper
       sidekiq_options retry: 2, backtrace: true
 
       PLACES_CASES_FILENAME = 'GeoDataset.json'
+      DATE_PLACES_CASES_FILENAME = 'DatePlacesCasesDataset.csv'
+      DATE_DIFF_PLACES_CASES_FILENAME = 'DateDiffPlacesCasesDataset.csv'
+      WEEK_PLACES_CASES_FILENAME = 'WeekPlacesCasesDataset.csv'
 
       def perform(country_name)
         container.disconnect

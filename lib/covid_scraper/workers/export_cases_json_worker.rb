@@ -10,6 +10,7 @@ module CovidScraper
       include Import['repositories.date_diff_cases_repository']
       include Import['repositories.date_active_cases_repository']
       include Import['repositories.date_positive_tests_repository']
+      include Import['repositories.week_cases_repository']
 
       include FileHelpers
 
@@ -21,6 +22,7 @@ module CovidScraper
       DATE_DIFF_CASES_FILENAME = 'DateDiffCasesDataset.json'
       DATE_ACTIVE_CASES_FILENAME = 'DateActiveCasesDataset.json'
       DATE_POSITIVE_TESTS_FILENAME = 'DatePositiveTestsDataset.json'
+      WEEK_CASES_FILENAME = 'WeekCasesDataset.csv'
 
       def perform(country_name)
         container.disconnect
