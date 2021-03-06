@@ -7,8 +7,8 @@ select
   case
     when date_part('month', ddpc.date::date) = 1 and date_part('week', ddpc.date::date) > 5 then date_part('year', ddpc.date::date) - 1
     else date_part('year', ddpc.date::date)
-  end as year,
-  date_part('week', ddpc.date::date) as week,
+  end::integer as year,
+  date_part('week', ddpc.date::date)::integer as week,
   sum(ddpc.infected) as infected
 from
   covid19.date_diff_places_cases ddpc

@@ -27,14 +27,14 @@ jobs = [
   {
     name: 'ExportCases',
     cron: '0 18 * * * Europe/Sofia',
-    class: 'CovidScraper::Workers::ExportCasesJsonWorker',
+    class: 'CovidScraper::Workers::ExportCasesDatasetsWorker',
     args: ['Bulgaria'],
     status: 'disabled'
   },
   {
     name: 'ExportPlacesCases',
     cron: '0 18 * * * Europe/Sofia',
-    class: 'CovidScraper::Workers::ExportPlacesJsonWorker',
+    class: 'CovidScraper::Workers::ExportPlacesDatasetsWorker',
     args: ['Bulgaria'],
     status: 'disabled'
   }

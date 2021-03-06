@@ -39,7 +39,7 @@ module CovidScraper
         result = create_case.call(input)
         case result
         when Success
-          ExportCasesJsonWorker.perform_async(country_name)
+          ExportCasesDatasetsWorker.perform_async(country_name)
         when Failure(Dry::Validation::Result)
           errors = result.failure.errors.to_h
           raise "An error occurred when creating case: #{errors}"

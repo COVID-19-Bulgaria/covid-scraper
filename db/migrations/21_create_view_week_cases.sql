@@ -6,8 +6,8 @@ select
   case
     when date_part('month', ddc.date::date) = 1 and date_part('week', ddc.date::date) > 5 then date_part('year', ddc.date::date) - 1
     else date_part('year', ddc.date::date)
-  end as year,
-  date_part('week', ddc.date::date) as week,
+  end::integer as year,
+  date_part('week', ddc.date::date)::integer as week,
   sum(ddc.infected) as infected,
   sum(ddc.cured) as cured,
   sum(ddc.fatal) as fatal,

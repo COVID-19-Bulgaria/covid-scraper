@@ -26,7 +26,7 @@ module CovidScraper
                                           scraped_places_cases,
                                           class_params[:website_uri])
 
-        ExportPlacesJsonWorker.perform_async(scraper.country)
+        ExportPlacesDatasetsWorker.perform_async(scraper.country)
       end
 
       private

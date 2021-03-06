@@ -2,7 +2,7 @@
 
 module CovidScraper
   module Workers
-    class ExportCasesJsonWorker
+    class ExportCasesDatasetsWorker
       include Import['container']
       include Import['repositories.countries_repository']
       include Import['repositories.cases_repository']
@@ -98,12 +98,11 @@ module CovidScraper
       def write_week_cases_file(country)
         write_file(
           filename: build_database_file_path(country.name, WEEK_CASES_FILENAME),
-          data: week_cases_repository
-                  .by_country_name(country.name)
-                  .map_with(:csv_mapper)
-                  .to_a
-                  .first
-                  .to_csv
+          data: CSV.generate do |csv|
+                  week_cases_repository.by_country_name(country.name).map_with(:csv_mapper).to_a.each do |row|
+                    csv << row
+                  end
+                end
         )
       end
     end
