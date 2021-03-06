@@ -34,6 +34,7 @@ module CovidScraper
         write_date_diff_cases_file(country)
         write_date_active_cases_file(country)
         write_positive_tests_file(country)
+        write_week_cases_file(country)
 
         PublishDatasetsWorker.perform_async
       end
