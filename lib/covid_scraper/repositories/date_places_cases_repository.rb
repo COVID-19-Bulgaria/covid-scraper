@@ -10,8 +10,8 @@ module CovidScraper
         date_places_cases.to_a
       end
 
-      def by_place_name(place_name)
-        date_places_cases.where(place: place_name)
+      def by_country_name(country_name)
+        date_places_cases.where(country: country_name)
       end
     end
   end

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'csv'
-
 module CovidScraper
   module Mappers
     class CsvMapper < ROM::Transformer
@@ -9,13 +7,15 @@ module CovidScraper
 
 
       def call(data)
-        CSV.generate do |csv|
-          csv << data.first.attributes.keys
-          
-          data.each do |entry|
-            csv << entry.attributes.values
-          end
+        csv_data = []
+
+        csv_data << data.first.attributes.keys
+
+        data.each do |entry|
+          csv_data << entry.attributes.values
         end
+
+        csv_data
       end
     end
   end

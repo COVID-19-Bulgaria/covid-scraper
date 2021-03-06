@@ -9,6 +9,7 @@ CovidScraper::Application.boot(:core) do
     require 'nokogiri'
     require 'open-uri'
     require 'json'
+    require 'csv'
     require 'pragmatic_segmenter'
     require 'pragmatic_tokenizer'
     require 'fuzzy_match'

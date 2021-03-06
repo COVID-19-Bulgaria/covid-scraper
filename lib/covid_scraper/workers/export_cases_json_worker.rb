@@ -94,6 +94,18 @@ module CovidScraper
                 ].to_json
         )
       end
+
+      def write_week_cases_file(country)
+        write_file(
+          filename: build_database_file_path(country.name, WEEK_CASES_FILENAME),
+          data: week_cases_repository
+                  .by_country_name(country.name)
+                  .map_with(:csv_mapper)
+                  .to_a
+                  .first
+                  .to_csv
+        )
+      end
     end
   end
 end
