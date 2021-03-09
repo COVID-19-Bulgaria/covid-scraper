@@ -1,0 +1,30 @@
+alter table covid19.places
+add population integer;
+
+update covid19.places set population = 410331 where name = 'Бургас';
+update covid19.places set population = 305123 where name = 'Благоевград';
+update covid19.places set population = 173831 where name = 'Добрич';
+update covid19.places set population = 108404 where name = 'Габрово';
+update covid19.places set population = 228141 where name = 'Хасково';
+update covid19.places set population = 118897 where name = 'Ямбол';
+update covid19.places set population = 119041 where name = 'Кюстендил';
+update covid19.places set population = 152873 where name = 'Кърджали';
+update covid19.places set population = 124873 where name = 'Ловеч';
+update covid19.places set population = 129637 where name = 'Монтана';
+update covid19.places set population = 255479 where name = 'Пазарджик';
+update covid19.places set population = 668334 where name = 'Пловдив';
+update covid19.places set population = 120880 where name = 'Перник';
+update covid19.places set population = 240380 where name = 'Плевен';
+update covid19.places set population = 112229 where name = 'Разград';
+update covid19.places set population = 218556 where name = 'Русе';
+update covid19.places set population = (1328120 + 229041) where name = 'София';
+update covid19.places set population = 172355 where name = 'Шумен';
+update covid19.places set population = 109271 where name = 'Силистра';
+update covid19.places set population = 186495 where name = 'Сливен';
+update covid19.places set population = 105421 where name = 'Смолян';
+update covid19.places set population = 316356 where name = 'Стара Загора';
+update covid19.places set population = 111597 where name = 'Търговище';
+update covid19.places set population = 471252 where name = 'Варна';
+update covid19.places set population = 84865 where name = 'Видин';
+update covid19.places set population = 162549 where name = 'Враца';
+update covid19.places set population = 235708 where name = 'Велико Търново';

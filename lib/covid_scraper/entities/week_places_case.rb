@@ -8,6 +8,7 @@ module CovidScraper
       attribute :year, Types::Coercible::Integer
       attribute :week, Types::Coercible::Integer
       attribute :infected, Types::Coercible::Integer
+      attribute :infected_100k, Types::Coercible::Integer
     end
   end
 end
