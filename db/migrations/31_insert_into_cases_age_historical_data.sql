@@ -1,4 +1,4 @@
-insert into covid19.cases_age ("id", "country", "group_0_1", "group_1_5", "group_6_9", "group_10_14", "group_15_19", "group_0_19", "group_20_29",
+insert into covid19.cases_age ("id", "country_id", "group_0_1", "group_1_5", "group_6_9", "group_10_14", "group_15_19", "group_0_19", "group_20_29",
                                "group_30_39", "group_40_49", "group_50_59", "group_60_69", "group_70_79", "group_80_89", "group_90", "timestamp")
 values
     (nextval('cases_age_id_seq'), 'Bulgaria', null, null, null, null, null, 162, 221, 395, 461, 547, 504, 261, 99, 18, '2020-06-06 00:00:00'),

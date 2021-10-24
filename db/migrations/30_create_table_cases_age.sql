@@ -1,6 +1,6 @@
 CREATE TABLE "covid19"."cases_age" (
     "id" serial NOT NULL PRIMARY KEY,
-    "country" character varying(32) NOT NULL,
+    "country_id" character varying(32) NOT NULL,
     "group_0_1" integer NULL,
     "group_1_5" integer NULL,
     "group_6_9" integer NULL,
