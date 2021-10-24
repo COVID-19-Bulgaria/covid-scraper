@@ -2,23 +2,9 @@
 
 module CovidScraper
   module Mappers
-    class DatePositiveTestsMapper < ROM::Transformer
+    class DatePositiveTestsMapper < CsvMapper
       relation :date_positive_tests
-      register_as :json_mapper
-
-      def call(data)
-        document = {}
-
-        data.each do |item|
-          document.merge!({
-                           item.date => {
-                             percentage: item.positive_percentage.to_f
-                           }
-                         })
-        end
-
-        document
-      end
+      register_as :csv_mapper
     end
   end
 end

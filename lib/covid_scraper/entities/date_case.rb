@@ -13,7 +13,9 @@ module CovidScraper
       attribute :intensive_care, Types::Coercible::Integer
       attribute :medical_staff, Types::Coercible::Integer
       attribute :pcr_tests, Types::Coercible::Integer
+      attribute :positive_pcr_tests, Types::Coercible::Integer
       attribute :antigen_tests, Types::Coercible::Integer
+      attribute :positive_antigen_tests, Types::Coercible::Integer
       attribute :vaccinated, Types::Coercible::Integer
       attribute :date, Types::Nominal::Date
     end

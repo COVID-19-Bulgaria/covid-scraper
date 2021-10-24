@@ -53,8 +53,16 @@ module CovidScraper
         @other_cases_scraper.pcr_tests
       end
 
+      def positive_pcr_tests
+        @other_cases_scraper.positive_pcr_tests
+      end
+
       def antigen_tests
         @other_cases_scraper.antigen_tests
+      end
+
+      def positive_antigen_tests
+        @other_cases_scraper.positive_antigen_tests
       end
 
       def regions_cases

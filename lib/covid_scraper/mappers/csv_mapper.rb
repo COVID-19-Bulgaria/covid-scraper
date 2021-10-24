@@ -5,7 +5,6 @@ module CovidScraper
     class CsvMapper < ROM::Transformer
       register_as :csv_mapper
 
-
       def call(data)
         csv_data = []
 

@@ -21,7 +21,7 @@ module CovidScraper
       DATE_CASES_FILENAME = 'DateCasesDataset.json'
       DATE_DIFF_CASES_FILENAME = 'DateDiffCasesDataset.json'
       DATE_ACTIVE_CASES_FILENAME = 'DateActiveCasesDataset.json'
-      DATE_POSITIVE_TESTS_FILENAME = 'DatePositiveTestsDataset.json'
+      DATE_POSITIVE_TESTS_FILENAME = 'DatePositiveTestsDataset.csv'
       WEEK_CASES_FILENAME = 'WeekCasesDataset.csv'
 
       def perform(country_name)
@@ -87,12 +87,11 @@ module CovidScraper
       def write_positive_tests_file(country)
         write_file(
           filename: build_database_file_path(country.name, DATE_POSITIVE_TESTS_FILENAME),
-          data: Hash[
-                  date_positive_tests_repository
-                    .by_country_name(country.name)
-                    .map_with(:json_mapper)
-                    .to_a
-                ].to_json
+          data: CSV.generate do |csv|
+                  date_positive_tests_repository.by_country_name(country.name).map_with(:csv_mapper).to_a.each do |row|
+                    csv << row
+                  end
+                end
         )
       end
 

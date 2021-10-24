@@ -6,7 +6,7 @@ module CovidScraper
   module Scrapers
     class BulgariaPortalJsonCasesScraper < CasesScraper
       COUNTRY_IDENTIFIER = 'Bulgaria'
-      WEBSITE_URI = 'https://coronavirus.bg/stats.json'     
+      WEBSITE_URI = 'https://coronavirus.bg/stats.json'
 
       def initialize(_class_params)
         super(country: COUNTRY_IDENTIFIER, uri: WEBSITE_URI)
@@ -48,8 +48,16 @@ module CovidScraper
         parse['tested_pcr']
       end
 
+      def positive_pcr_tests
+        parse['infected_pcr']
+      end
+
       def antigen_tests
         parse['tested_antigen']
+      end
+
+      def positive_antigen_tests
+        parse['infected_antigen']
       end
 
       def regions_cases

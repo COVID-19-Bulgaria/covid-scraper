@@ -121,7 +121,15 @@ module CovidScraper
         nil
       end
 
+      def positive_pcr_tests
+        nil
+      end
+
       def antigen_tests
+        nil
+      end
+
+      def positive_antigen_tests
         nil
       end
 
