@@ -1,6 +1,6 @@
 CREATE TABLE "covid19"."cases_age" (
     "id" serial NOT NULL PRIMARY KEY,
-    "country_id" character varying(32) NOT NULL,
+    "country_id" integer NOT NULL,
     "group_0_1" integer NULL,
     "group_1_5" integer NULL,
     "group_6_9" integer NULL,
@@ -15,7 +15,8 @@ CREATE TABLE "covid19"."cases_age" (
     "group_70_79" integer NULL,
     "group_80_89" integer NULL,
     "group_90" integer NULL,
-    "timestamp" timestamp NOT NULL
+    "timestamp" timestamp NOT NULL,
+    FOREIGN KEY ("country_id") REFERENCES "covid19"."countries" ("id")
 );
 
 CREATE INDEX "cases_age_timestamp" ON "covid19"."cases_age" ("timestamp");

@@ -31,7 +31,7 @@ module CovidScraper
       private
 
       def create_case_age(input, country_name)
-        create_case_age = CovidScraper::Transactions::Cases::CreateCaseAge.new
+        create_case_age = CovidScraper::Transactions::CasesAge::CreateCaseAge.new
         result = create_case_age.call(input)
         case result
         when Success
