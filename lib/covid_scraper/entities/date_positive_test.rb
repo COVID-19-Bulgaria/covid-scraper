@@ -6,11 +6,11 @@ module CovidScraper
       attribute :country, Types::Coercible::String
       attribute :pcr_tests, Types::Coercible::Integer
       attribute :antigen_tests, Types::Coercible::Integer
-      attribute :positive_percentage, Types::Coercible::Decimal
+      attribute :positive_percentage, Types::Coercible::Float
       attribute :positive_pcr_tests, Types::Coercible::Integer
-      attribute :pcr_positive_percentage, Types::Coercible::Decimal
+      attribute :pcr_positive_percentage, Types::Coercible::Float
       attribute :positive_antigen_tests, Types::Coercible::Integer
-      attribute :antigen_positive_percentage, Types::Coercible::Decimal
+      attribute :antigen_positive_percentage, Types::Coercible::Float
       attribute :date, Types::Nominal::Date
     end
   end
