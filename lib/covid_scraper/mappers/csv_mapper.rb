@@ -11,7 +11,7 @@ module CovidScraper
         csv_data << data.first.attributes.keys
 
         data.each do |entry|
-          csv_data << entry.attributes.values
+          csv_data << entry.attributes.values.map { |value| value.is_a?(BigDecimal) ? value.to_f : value }
         end
 
         csv_data
