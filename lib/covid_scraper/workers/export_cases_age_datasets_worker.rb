@@ -5,7 +5,7 @@ module CovidScraper
     class ExportCasesAgeDatasetsWorker
       include Import['container']
       include Import['repositories.countries_repository']
-      include Import['repositories.cases_age_repository']
+      include Import['repositories.date_cases_age_repository']
 
       include FileHelpers
 
@@ -30,7 +30,7 @@ module CovidScraper
         write_file(
           filename: build_database_file_path(country.name, CASES_AGE_DATASET_FILENAME),
           data: CSV.generate do |csv|
-            cases_age_repository.by_country_name(country.name).map_with(:csv_mapper).to_a.each do |row|
+            date_cases_age_repository.by_country_name(country.name).map_with(:csv_mapper).to_a.each do |row|
               csv << row
             end
           end

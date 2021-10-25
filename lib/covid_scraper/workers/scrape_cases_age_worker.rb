@@ -20,12 +20,12 @@ module CovidScraper
 
         country = countries_repository.by_name(scraper.country).first
         latest_cases_age = cases_age_repository.latest(country.id)
-        scraped_cases = scraper.scrape(country.id)
+        scraped_cases_age = scraper.scrape(country.id)
 
-        return if scraper.cases_match?(latest_cases_age, scraped_cases) ||
-          !scraper.new_data?(latest_cases_age, scraped_cases)
+        return if scraper.cases_match?(latest_cases_age, scraped_cases_age) ||
+          !scraper.new_data?(latest_cases_age, scraped_cases_age)
 
-        create_case_age(scraped_cases, scraper.country)
+        create_case_age(scraped_cases_age.to_h, scraper.country)
       end
 
       private
@@ -38,7 +38,7 @@ module CovidScraper
           ExportCasesAgeDatasetsWorker.perform_async(country_name)
         when Failure(Dry::Validation::Result)
           errors = result.failure.errors.to_h
-          raise "An error occurred when creating case: #{errors}"
+          raise "An error occurred when creating case age: #{errors}"
         end
       end
     end
