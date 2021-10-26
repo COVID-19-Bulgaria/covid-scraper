@@ -58,7 +58,8 @@ module CovidScraper
           regions_cases_hash[region] = cases
         end
 
-        regions_cases_hash['София'] += regions_cases_hash.delete('София (столица)')
+        regions_cases_hash['София област'] = regions_cases_hash.delete('София')
+        regions_cases_hash['София'] = regions_cases_hash.delete('София (столица)')
 
         regions_cases_hash
       end
