@@ -54,8 +54,8 @@ module CovidScraper
             {
               place_id: latest_place_cases.place_id,
               infected: cases,
-              cured: latest_place_cases.cured,
-              fatal: latest_place_cases.fatal,
+              cured: 0,
+              fatal: 0,
               sources: sources,
               timestamp: Time.now
             }
