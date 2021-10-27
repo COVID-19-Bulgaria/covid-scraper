@@ -2,7 +2,7 @@
 
 module CovidScraper
   module Entities
-    class RollingBiWeeklyPlacesCasesEntity < ROM::Struct
+    class RollingBiweeklyPlacesCasesEntity < ROM::Struct
       attribute :country, Types::Coercible::String
       attribute :place, Types::Coercible::String
       attribute :infected, Types::Coercible::Integer

@@ -2,7 +2,7 @@
 
 module CovidScraper
   module Repositories
-    class RollingBiWeeklyPlacesCasesRepository < ROM::Repository[:rolling_biweekly_places_cases]
+    class RollingBiweeklyPlacesCasesRepository < ROM::Repository[:rolling_biweekly_places_cases]
       include Import['container']
       struct_namespace CovidScraper
 
