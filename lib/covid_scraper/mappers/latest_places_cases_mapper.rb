@@ -12,8 +12,8 @@ module CovidScraper
             v.name => {
               coordinates: [v.latitude, v.longitude],
               infected: v.infected,
-              cured: v.cured,
-              fatal: v.fatal,
+              newly_infected: v.newly_infected,
+              infected_14d_100k: v.infected_14d_100k,
               timestamp: v.timestamp
             }
           }

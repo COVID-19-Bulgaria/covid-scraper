@@ -9,6 +9,7 @@ module CovidScraper
       include Import['repositories.date_places_cases_repository']
       include Import['repositories.date_diff_places_cases_repository']
       include Import['repositories.week_places_cases_repository']
+      include Import['repositories.rolling_biweekly_places_cases_repository']
 
       include FileHelpers
 
@@ -19,6 +20,7 @@ module CovidScraper
       DATE_PLACES_CASES_FILENAME = 'DatePlacesCasesDataset.csv'
       DATE_DIFF_PLACES_CASES_FILENAME = 'DateDiffPlacesCasesDataset.csv'
       WEEK_PLACES_CASES_FILENAME = 'WeekPlacesCasesDataset.csv'
+      ROLLING_BIWEEKLY_PLACES_CASES_FILENAME = 'RollingBiWeeklyPlacesCasesDataset.csv'
 
       def perform(country_name)
         container.disconnect
@@ -29,6 +31,7 @@ module CovidScraper
         write_date_places_cases_file(country)
         write_date_diff_places_cases_file(country)
         write_week_places_cases_file(country)
+        write_rolling_biweekly_places_cases_file(country)
 
         PublishDatasetsWorker.perform_async
       end
@@ -74,6 +77,17 @@ module CovidScraper
           filename: build_database_file_path(country.name, WEEK_PLACES_CASES_FILENAME),
           data: CSV.generate do |csv|
                   week_places_cases_repository.by_country_name(country.name).map_with(:csv_mapper).to_a.each do |row|
+                    csv << row
+                  end
+                end
+        )
+      end
+
+      def write_rolling_biweekly_places_cases_file(country)
+        write_file(
+          filename: build_database_file_path(country.name, ROLLING_BIWEEKLY_PLACES_CASES_FILENAME),
+          data: CSV.generate do |csv|
+                  rolling_biweekly_places_cases_repository.by_country_name(country.name).map_with(:csv_mapper).to_a.each do |row|
                     csv << row
                   end
                 end
