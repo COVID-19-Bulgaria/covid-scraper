@@ -73,6 +73,8 @@ module CovidScraper
       def regions_vaccinations
         raw_regions_vaccinations = statistics_container.css(REGIONS_VACCINATIONS_CSS)
 
+        raise CovidScraper::Scrapers::Exceptions::ArticleSegmentationError.new(field: 'regions_vaccinations') if !raw_regions_vaccinations || raw_regions_vaccinations.empty?
+
         regions_vaccinations_hash = {}
 
         raw_regions_vaccinations.each_with_index do |region_row, i|
@@ -93,7 +95,7 @@ module CovidScraper
         regions_vaccinations_hash['София област'] = regions_vaccinations_hash.delete('София')
         regions_vaccinations_hash['София'] = regions_vaccinations_hash.delete('София (столица)')
 
-        raw_regions_vaccinations
+        regions_vaccinations_hash
       end
 
       private
