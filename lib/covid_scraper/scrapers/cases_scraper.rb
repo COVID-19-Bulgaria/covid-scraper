@@ -55,6 +55,10 @@ module CovidScraper
         raise 'Override with actual implementation.'
       end
 
+      def regions_vaccinations
+        raise 'Override with actual implementation.'
+      end
+
       def pcr_tests
         raise 'Override with actual implementation'
       end

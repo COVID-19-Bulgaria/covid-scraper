@@ -23,4 +23,6 @@ from
     covid19.countries ctr on ca.country_id = ctr.id
 group by
     ctr.id,
-    ca.timestamp::date;
+    ca.timestamp::date
+order by
+    date(ca.timestamp) asc;

@@ -14,6 +14,12 @@ module CovidScraper
               infected: v.infected,
               newly_infected: v.newly_infected,
               infected_14d_100k: v.infected_14d_100k,
+              doses: v.doses,
+              new_doses: v.new_doses,
+              fully_vaccinated: v.fully_vaccinated,
+              new_fully_vaccinated: v.new_fully_vaccinated,
+              booster: v.booster,
+              new_booster: v.new_booster,
               timestamp: v.timestamp
             }
           }

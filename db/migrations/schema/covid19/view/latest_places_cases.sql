@@ -10,6 +10,12 @@ select
 	pc.infected,
 	ddpc.infected as newly_infected,
 	rbpc.infected_avg_100k as infected_14d_100k,
+    pc.doses,
+    ddpc.doses as new_doses,
+    pc.fully_vaccinated,
+    ddpc.fully_vaccinated as new_fully_vaccinated,
+    pc.booster,
+    ddpc.booster as new_booster,
 	pc.timestamp
 from
 	covid19.places_cases pc

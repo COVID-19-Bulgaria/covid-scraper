@@ -20,16 +20,29 @@ module CovidScraper
         scraper = scraper_class.new(class_params)
 
         country = countries_repository.by_name(scraper.country).first
-        scraped_places_cases = scraper.regions_cases
+        regions_data_hash = build_regions_data_hash(scraper.regions_cases, scraper.regions_vaccinations)
 
         return unless update_places_cases(country.id,
-                                          scraped_places_cases,
+                                          regions_data_hash,
                                           class_params[:website_uri])
 
         ExportPlacesDatasetsWorker.perform_async(scraper.country)
       end
 
       private
+
+      def build_regions_data_hash(cases_hash, vaccinations_hash)
+        regions_data_hash = cases_hash
+
+        regions_data_hash.each do |region, region_cases_hash|
+          region_vaccinations_hash = vaccinations_hash[region]
+          next if region_vaccinations_hash.nil? or not region_vaccinations_hash.is_a?(Hash)
+
+          regions_data_hash[region] = region_cases_hash.merge(region_vaccinations_hash)
+        end
+
+        regions_data_hash
+      end
 
       def insert_places_case(places_case)
         result = create_places_case.call(places_case)
@@ -40,22 +53,26 @@ module CovidScraper
         end
       end
 
-      def update_places_cases(country_id, scraped_places_cases, sources = nil)
+      def update_places_cases(country_id, regions_data_hash, sources = nil)
         has_changed = false
 
-        scraped_places_cases.each do |place, cases|
+        regions_data_hash.each do |region, data|
           latest_place_cases = latest_places_cases_repository
-                               .by_country_id_and_name(country_id, place)
+                               .by_country_id_and_name(country_id, region)
 
           next unless latest_place_cases &&
-                      latest_place_cases.infected != cases
+            (latest_place_cases.infected != data[:infected] ||
+              latest_place_cases.doses != data[:doses] ||
+              latest_place_cases.fully_vaccinated != data[:fully_vaccinated] ||
+              latest_place_cases.booster != data[:booster])
 
           insert_places_case(
             {
               place_id: latest_place_cases.place_id,
-              infected: cases,
-              cured: 0,
-              fatal: 0,
+              infected: data[:infected],
+              doses: data[:doses],
+              fully_vaccinated: data[:fully_vaccinated],
+              booster: data[:booster],
               sources: sources,
               timestamp: Time.now
             }

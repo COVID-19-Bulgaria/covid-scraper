@@ -6,8 +6,9 @@ module CovidScraper
       attribute? :id, Types::Coercible::Integer
       attribute :place_id, Types::Coercible::Integer
       attribute :infected, Types::Coercible::Integer
-      attribute :cured, Types::Coercible::Integer
-      attribute :fatal, Types::Coercible::Integer
+      attribute :doses, Types::Coercible::Integer
+      attribute :fully_vaccinated, Types::Coercible::Integer
+      attribute :booster, Types::Coercible::Integer
       attribute? :sources, Types::Coercible::String
       attribute :timestamp, Types::Nominal::Time
     end

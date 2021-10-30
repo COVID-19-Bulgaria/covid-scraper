@@ -7,8 +7,9 @@ module CovidScraper
         params do
           required(:place_id).filled(:integer)
           required(:infected).filled(:integer)
-          required(:cured).filled(:integer)
-          required(:fatal).filled(:integer)
+          optional(:doses).maybe(:integer)
+          optional(:fully_vaccinated).maybe(:integer)
+          optional(:booster).maybe(:integer)
           optional(:sources).maybe(:string)
           required(:timestamp).filled(:time)
         end

@@ -5,6 +5,9 @@ select
 	p.id as place_id,
 	p.name as place,
 	max(pc.infected) as infected,
+	max(pc.doses) as doses,
+	max(pc.fully_vaccinated) as fully_vaccinated,
+	max(pc.booster) as booster,
 	date(pc.timestamp) as date
 from
 	covid19.places_cases pc

@@ -69,6 +69,10 @@ module CovidScraper
         @other_cases_scraper.regions_cases
       end
 
+      def regions_vaccinations
+        @other_cases_scraper.regions_vaccinations
+      end
+
       def men
         nil
       end

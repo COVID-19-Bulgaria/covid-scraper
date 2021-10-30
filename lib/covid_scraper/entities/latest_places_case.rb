@@ -9,6 +9,12 @@ module CovidScraper
       attribute :infected, Types::Coercible::Integer
       attribute :newly_infected, Types::Coercible::Integer
       attribute :infected_14d_100k, Types::Coercible::Integer
+      attribute :doses, Types::Coercible::Integer
+      attribute :new_doses, Types::Coercible::Integer
+      attribute :fully_vaccinated, Types::Coercible::Integer
+      attribute :new_fully_vaccinated, Types::Coercible::Integer
+      attribute :booster, Types::Coercible::Integer
+      attribute :new_booster, Types::Coercible::Integer
       attribute :timestamp, Types::Nominal::Time
     end
   end
