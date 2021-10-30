@@ -103,7 +103,7 @@ module CovidScraper
       end
 
       def number_of_vaccine_types
-        @number_of_vaccine_types ||= statistics_container.css(REGIONS_VACCINATIONS_VACCINE_TYPE_CSS)
+        @number_of_vaccine_types ||= statistics_container.css(REGIONS_VACCINATIONS_VACCINE_TYPE_CSS).count
       end
 
       def regions_vaccinations_fully_vaccinated_css
