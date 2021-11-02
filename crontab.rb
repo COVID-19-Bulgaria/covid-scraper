@@ -7,19 +7,19 @@ CovidScraper::Application.finalize!
 jobs = [
   {
     name: 'BulgariaCasesScraper',
-    cron: '*/15 8,9,10,11,17,18,19,20,0 * * * Europe/Sofia',
+    cron: '*/15 8,9,10,11,17,18,19,20,0,1,2 * * * Europe/Sofia',
     class: 'CovidScraper::Workers::ScrapeCasesWorker',
     args: ['CovidScraper::Scrapers::BulgariaPortalHomepageCasesScraper']
   },
   {
     name: 'BulgariaPlacesCasesScraper',
-    cron: '*/15 8,9,10,11,17,18,19,20,0 * * * Europe/Sofia',
+    cron: '*/15 8,9,10,11,17,18,19,20,0,1,2 * * * Europe/Sofia',
     class: 'CovidScraper::Workers::ScrapePlacesCasesWorker',
     args: ['CovidScraper::Scrapers::BulgariaPortalHomepageCasesScraper']
   },
   {
     name: 'BulgariaCasesAgeScraper',
-    cron: '*/15 8,9,10,11,17,18,19,20,0 * * * Europe/Sofia',
+    cron: '*/15 8,9,10,11,17,18,19,20,0,1,2 * * * Europe/Sofia',
     class: 'CovidScraper::Workers::ScrapeCasesAgeWorker',
     args: ['CovidScraper::Scrapers::BulgariaPortalCasesAgeScraper']
   },

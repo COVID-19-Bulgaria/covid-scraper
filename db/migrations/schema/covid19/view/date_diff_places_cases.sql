@@ -39,7 +39,7 @@ right join
             0 as booster,
 			d::date as date
 	from
-			generate_series('2020-06-08'::date, current_date, '1 day'::interval) d,
+			generate_series('2020-06-08'::date, current_date + 1, '1 day'::interval) d,
 			covid19.places p
 	join
 			covid19.countries c on
