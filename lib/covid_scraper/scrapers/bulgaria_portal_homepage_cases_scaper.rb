@@ -6,7 +6,7 @@ module CovidScraper
   module Scrapers
     class BulgariaPortalHomepageCasesScraper < CasesScraper
       COUNTRY_IDENTIFIER = 'Bulgaria'
-      WEBSITE_URI = 'https://coronavirus.bg'
+      WEBSITE_URI = 'https://coronavirus.bg/bg/'
       STATISTICS_CONTAINER_CSS = 'div.statistics-container'
       INFECTED_CSS = 'p.confirmed'
       CURED_CSS = 'p.healed'
