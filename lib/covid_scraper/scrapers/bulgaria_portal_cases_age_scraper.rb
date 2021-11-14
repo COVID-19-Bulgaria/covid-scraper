@@ -17,7 +17,7 @@ module CovidScraper
       end
 
       def scrape(country_id)
-        CovidScraper::Entities::CaseAge.new(
+        CovidScraper::Entities::CasesAgeEntity.new(
           country_id: country_id,
           group_0_1: cases_age['0_1'],
           group_1_5: cases_age['1_5'],

@@ -2,7 +2,7 @@
 
 module CovidScraper
   module Entities
-    class Case < ROM::Struct
+    class CasesEntity < ROM::Struct
       attribute? :id, Types::Coercible::Integer.optional
       attribute :country_id, Types::Coercible::Integer
       attribute :infected, Types::Coercible::Integer

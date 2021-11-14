@@ -33,7 +33,7 @@ module CovidScraper
       end
 
       def scrape(country_id)
-        CovidScraper::Entities::Case.new(
+        CovidScraper::Entities::CasesEntity.new(
           country_id: country_id,
           infected: infected,
           cured: cured,

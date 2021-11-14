@@ -47,7 +47,7 @@ module CovidScraper
       end
 
       def fill_missing_data_with_latest_known(latest_known, scraped_cases)
-        CovidScraper::Entities::Case.new(
+        CovidScraper::Entities::CasesEntity.new(
           latest_known.attributes
                       .filter { |key, _| !%i[id timestamp].include?(key) }
                       .merge(scraped_cases.attributes)

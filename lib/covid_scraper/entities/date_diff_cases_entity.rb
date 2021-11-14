@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require_relative './date_places_case'
+require_relative './date_cases_entity'
 
 module CovidScraper
   module Entities
-    class DateDiffPlacesCase < DatePlacesCase
+    class DateDiffCasesEntity < DateCasesEntity
     end
   end
 end

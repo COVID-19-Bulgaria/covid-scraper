@@ -2,7 +2,7 @@
 
 module CovidScraper
   module Entities
-    class DateCaseAge < ROM::Struct
+    class DateCasesAgeEntity < ROM::Struct
       attribute :country, Types::Coercible::String
       attribute :group_0_1, Types::Coercible::Integer
       attribute :group_1_5, Types::Coercible::Integer

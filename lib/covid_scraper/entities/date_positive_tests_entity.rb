@@ -2,7 +2,7 @@
 
 module CovidScraper
   module Entities
-    class DatePositiveTest < ROM::Struct
+    class DatePositiveTestsEntity < ROM::Struct
       attribute :country, Types::Coercible::String
       attribute :pcr_tests, Types::Coercible::Integer
       attribute :antigen_tests, Types::Coercible::Integer

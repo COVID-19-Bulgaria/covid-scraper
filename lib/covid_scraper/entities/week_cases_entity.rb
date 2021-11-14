@@ -2,7 +2,7 @@
 
 module CovidScraper
   module Entities
-    class WeekCase < ROM::Struct
+    class WeekCasesEntity < ROM::Struct
       attribute :country, Types::Coercible::String
       attribute :year, Types::Coercible::Integer
       attribute :week, Types::Coercible::Integer

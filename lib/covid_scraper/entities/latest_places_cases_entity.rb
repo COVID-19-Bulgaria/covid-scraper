@@ -2,7 +2,7 @@
 
 module CovidScraper
   module Entities
-    class LatestPlacesCase < ROM::Struct
+    class LatestPlacesCasesEntity < ROM::Struct
       attribute :name, Types::Coercible::String
       attribute :longitude, Types::Coercible::Float
       attribute :latitude, Types::Coercible::Float

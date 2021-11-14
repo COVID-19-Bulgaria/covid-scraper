@@ -2,12 +2,12 @@
 
 module CovidScraper
   module Entities
-    class Place < ROM::Struct
+    class CountryEntity < ROM::Struct
       attribute :id, Types::Coercible::Integer
-      attribute :country_id, Types::Coercible::Integer
       attribute :name, Types::Coercible::String
       attribute :longitude, Types::Coercible::Float
       attribute :latitude, Types::Coercible::Float
+      attribute :zoom, Types::Coercible::Integer
     end
   end
 end

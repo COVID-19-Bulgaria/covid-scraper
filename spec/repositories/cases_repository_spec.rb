@@ -16,7 +16,7 @@ RSpec.describe CovidScraper::Repositories::CasesRepository do
         country_id: 1
       )
 
-      expect(new_case).to be_a(CovidScraper::Case)
+      expect(new_case).to be_a(CovidScraper::CasesEntity)
       expect(new_case.infected).to eq(0)
       expect(new_case.cured).to eq(0)
       expect(new_case.fatal).to eq(0)
