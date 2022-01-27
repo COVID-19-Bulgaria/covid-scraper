@@ -23,7 +23,7 @@ gem 'pragmatic_tokenizer', '~> 3.0', '>= 3.0.7'
 gem 'pry'
 gem 'rack', '~> 2.2', '>= 2.2.2'
 gem 'rubocop', require: false
-gem 'sidekiq', '~> 6.0', '>= 6.0.6'
+gem 'sidekiq', '~> 6.4'
 gem 'sidekiq-cron', '~> 1.1'
 
 group :test do
