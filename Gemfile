@@ -21,7 +21,7 @@ gem 'nokogiri', '~> 1.10', '>= 1.10.9'
 gem 'pragmatic_segmenter', '~> 0.3.22'
 gem 'pragmatic_tokenizer', '~> 3.0', '>= 3.0.7'
 gem 'pry'
-gem 'rack', '~> 2.2', '>= 2.2.2'
+gem 'rack', '~> 2.2'
 gem 'rubocop', require: false
 gem 'sidekiq', '~> 6.0', '>= 6.0.6'
 gem 'sidekiq-cron', '~> 1.1'
