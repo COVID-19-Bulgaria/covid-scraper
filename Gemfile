@@ -16,7 +16,7 @@ gem 'rom-sql', '~> 3.2'
 
 gem 'foreman', '~> 0.87.0'
 gem 'fuzzy_match', '~> 2.1'
-gem 'git', '~> 1.6'
+gem 'git', '~> 1.13'
 gem 'nokogiri', '~> 1.10', '>= 1.10.9'
 gem 'pragmatic_segmenter', '~> 0.3.22'
 gem 'pragmatic_tokenizer', '~> 3.0', '>= 3.0.7'

@@ -1,6 +1,8 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    addressable (2.8.1)
+      public_suffix (>= 2.0.2, < 6.0)
     ast (2.4.0)
     coderay (1.1.2)
     concurrent-ruby (1.1.6)
@@ -76,7 +78,8 @@ GEM
       et-orbi (~> 1.1, >= 1.1.8)
       raabro (~> 1.1)
     fuzzy_match (2.1.0)
-    git (1.6.0)
+    git (1.13.0)
+      addressable (~> 2.8)
       rchardet (~> 1.8)
     ice_nine (0.11.2)
     jaro_winkler (1.5.4)
@@ -95,6 +98,7 @@ GEM
     pry (0.13.0)
       coderay (~> 1.1)
       method_source (~> 1.0)
+    public_suffix (5.0.1)
     raabro (1.1.6)
     rack (2.2.2)
     rack-protection (2.0.8.1)
@@ -181,7 +185,7 @@ DEPENDENCIES
   dry-validation (~> 1.5)
   foreman (~> 0.87.0)
   fuzzy_match (~> 2.1)
-  git (~> 1.6)
+  git (~> 1.13)
   nokogiri (~> 1.10, >= 1.10.9)
   pg (~> 1.2, >= 1.2.3)
   pragmatic_segmenter (~> 0.3.22)
